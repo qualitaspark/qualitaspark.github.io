@@ -1,0 +1,78 @@
+:root {
+  --gray-light: #f2f2f2;
+  --white: #fff;
+  --black: #202020;
+  --primary: #EB6A0C;
+  --primary-light: #F29E61;
+  --border-radius-l: 2.5rem;
+  --border-radius-m: 1.25rem;
+  --gray: #E7E6E6;
+  --main-max-width: 40rem;
+  --main-padding: 1.875rem;
+  --body-padding-y: 3.75rem;
+  --body-padding-x: 12.5rem;
+  font-family: 'pp_right_grotesk_monobold';
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--gray-light);
+  color: var(--black);
+
+  padding: var(--body-padding-y) var(--body-padding-x);
+}
+
+bg-image-container {
+  position: fixed;
+  width: 100dvw;
+  height: 100dvh;
+  overflow: hidden;
+
+  bg-image {
+    position: fixed;
+    display: flex;
+    gap: 60px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-10%, -50%);
+    z-index: 0; 
+    opacity: 0.2;
+
+    #bg-logo-image {
+      width: 100%;
+      background-image: url('/assets/logo.svg');
+      background-size: cover;
+      width: 500px;
+      height: 500px;
+    }
+
+    #bg-logotype-image {
+      width: 100%;
+      background-image: url('/assets/logotipo.svg');
+      background-size: cover;
+      width: 500px;
+      height: 500px;
+    }
+  }
+}
+
+main {
+  position: relative;
+  background-color: var(--white);
+  padding: var(--main-padding);
+  border-radius: var(--border-radius-m);
+  max-width: var(--main-max-width);
+}
+
+header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 6.25rem;
+
+  a {
+    display: flex;
+    gap: 1rem;
+  }
+}

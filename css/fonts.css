@@ -1,0 +1,44 @@
+@font-face {
+  font-family: 'pp_right_grotesk_monobold';
+  src: url('/assets/pprightgroteskmono-bold.woff2') format('woff2'),
+       url('/assets/fonts/pprightgroteskmono-bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'pp_right_grotesk_monoBdIt';
+  src: url('/assets/fonts/pprightgroteskmono-bolditalic.woff2') format('woff2'),
+       url('/assets/fonts/pprightgroteskmono-bolditalic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'pp_right_grotesk_monomedium';
+  src: url('/assets/fonts/pprightgroteskmono-medium.woff2') format('woff2'),
+       url('/assets/fonts/pprightgroteskmono-medium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'pp_right_grotesk_monoregular';
+  src: url('/assets/fonts/pprightgroteskmono-regular.woff2') format('woff2'),
+       url('/assets/fonts/pprightgroteskmono-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'pp_right_grotesk_monoRgIt';
+  src: url('/assets/fonts/pprightgroteskmono-regularitalic.woff2') format('woff2'),
+       url('/assets/fonts/pprightgroteskmono-regularitalic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
