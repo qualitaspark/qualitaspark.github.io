@@ -292,5 +292,5 @@ export default function main () {
 
 document.addEventListener("DOMContentLoaded", () => {
   const chat = main();
-  chat.init(messages);
+  chat.init(messages, 'oh');
 })

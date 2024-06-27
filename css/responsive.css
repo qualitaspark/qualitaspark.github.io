@@ -1,0 +1,11 @@
+@media (max-width: 859px) {
+  :root {
+    --body-padding-x: 3.75rem;
+    --main-max-width: 100%;
+    font-size: 10px;
+  }
+
+  body {
+    padding: var(--body-padding-y) var(--body-padding-x);
+  }
+}

@@ -29,7 +29,7 @@ export const messages = [
     nexts: ["founders"],
     content: {
       type: NODE_TYPES.TEXT_NODE,
-      classes: [TEXT_CLASSES.BOLD],
+      classes: [TEXT_CLASSES.BOLD, TEXT_CLASSES.ITALIC],
       content: [
         {
           type: NODE_TYPES.TEXT,
