@@ -53,162 +53,150 @@ text-node {
 
 
 .chat {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3125rem;
-
-  &::after {
-    content: "";
-    position: relative;
-    display: block;
-    height: 80px;
-  }
-
-  .bubble {
-    position: relative;
-    border-radius: var(--border-radius-s);
-    font-size: 3rem;
-    width: fit-content;
-    font-family: 'pp_right_grotesk_monoregular';
-
-    &::after {
-      bottom: -0.0625rem;
-      border-style: solid;
-      border-width: 0.625rem;
-      border: 0.625rem solid transparent;
-    }
-
-    &:nth-child(2) {
-      border-top-left-radius: var(--border-radius-l);
-      border-top-right-radius: var(--border-radius-l);
-    }
-
-    &.bubble-ai+&.bubble-user,
-    &.bubble-user+&.bubble-ai {
-      margin-top: 1.250rem;
-      border-top-left-radius: var(--border-radius-l);
-      border-top-right-radius: var(--border-radius-l);
-    }
-
-    &.bubble-ai:has(+ .bubble-user),
-    &.bubble-user:has(+ .bubble-ai),
-    &.bubble-ai:last-child,
-    &.bubble-user:last-child {
-      border-bottom-left-radius: var(--border-radius-l);
-      border-bottom-right-radius: var(--border-radius-l);
-
+  .messages {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3125rem;
+  
+    .bubble {
+      position: relative;
+      border-radius: var(--border-radius-s);
+      font-size: 3rem;
+      width: fit-content;
+      font-family: 'pp_right_grotesk_monoregular';
+  
       &::after {
-        content: '';
-        display: block;
-        position: absolute;
-        width: 0;
-        height: 0;
-        border-top-width: 0.625rem;
+        bottom: -0.0625rem;
+        border-style: solid;
+        border-width: 0.625rem;
+        border: 0.625rem solid transparent;
       }
-    }
-
-    &.bubble-ai:has(+ .bubble-user)::after,
-    &.bubble-ai:last-child::after {
-      border-top-color: var(--gray-light);
-    }
-
-    &.bubble-user:has(+ .bubble-ai)::after,
-    &.bubble-user:last-child::after {
-      border-top-color: var(--primary);
-    }
-
-    &.bubble-ai {
-      background-color: var(--gray-light);
-
-      &::after {
-        left: -0.75rem;
-        transform-origin: center bottom;
-        transform: rotateZ(45deg);
+  
+      &:first-child {
+        border-top-left-radius: var(--border-radius-l);
+        border-top-right-radius: var(--border-radius-l);
       }
-    }
-
-    &.bubble-user {
-      align-self: flex-end;
-      background-color: var(--primary);
-      color: var(--white);
-      font-family: 'pp_right_grotesk_monomedium';
-
-      &::after {
-        right: -0.75rem;
-        transform-origin: center bottom;
-        transform: rotateZ(-45deg);
+  
+      &.bubble-ai+&.bubble-user,
+      &.bubble-user+&.bubble-ai {
+        margin-top: 1.250rem;
+        border-top-left-radius: var(--border-radius-l);
+        border-top-right-radius: var(--border-radius-l);
       }
-    }
-
-    &:not(.bubble-img) {
-      padding: 1.875rem;
-    }
-
-    &.bubble-img {
-      overflow: hidden;
-
-      p, & > text-node {
-        display: inline-block;
+  
+      &.bubble-ai:has(+ .bubble-user),
+      &.bubble-user:has(+ .bubble-ai),
+      &.bubble-ai:last-child,
+      &.bubble-user:last-child {
+        border-bottom-left-radius: var(--border-radius-l);
+        border-bottom-right-radius: var(--border-radius-l);
+  
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 0;
+          height: 0;
+          border-top-width: 0.625rem;
+        }
+      }
+  
+      &.bubble-ai:has(+ .bubble-user)::after,
+      &.bubble-ai:last-child::after {
+        border-top-color: var(--gray-light);
+      }
+  
+      &.bubble-user:has(+ .bubble-ai)::after,
+      &.bubble-user:last-child::after {
+        border-top-color: var(--primary);
+      }
+  
+      &.bubble-ai {
+        background-color: var(--gray-light);
+  
+        &::after {
+          left: -0.75rem;
+          transform-origin: center bottom;
+          transform: rotateZ(45deg);
+        }
+      }
+  
+      &.bubble-user {
+        align-self: flex-end;
+        background-color: var(--primary);
+        color: var(--white);
+        font-family: 'pp_right_grotesk_monomedium';
+  
+        &::after {
+          right: -0.75rem;
+          transform-origin: center bottom;
+          transform: rotateZ(-45deg);
+        }
+      }
+  
+      &:not(.bubble-img) {
         padding: 1.875rem;
       }
-
-      .images {
-        display: grid;
-        width: 100%;
-        gap: 1px;
-
-        &.images-slots-1 {
-          grid-template: auto / 1fr;
+  
+      &.bubble-img {
+        overflow: hidden;
+  
+        p, & > text-node {
+          display: inline-block;
+          padding: 1.875rem;
         }
-
-        &.images-slots-2 {
-          grid-template: repeat(2, auto) / 1fr;
+  
+        .images {
+          display: grid;
+          width: 100%;
+          gap: 1px;
+  
+          &.images-slots-1 {
+            grid-template: auto / 1fr;
+          }
+  
+          &.images-slots-2 {
+            grid-template: repeat(2, auto) / 1fr;
+          }
+  
+          &.images-slots-3,
+          &.images-slots-4 {
+            grid-template: repeat(2, auto) / repeat(2, 1fr);
+          }
+  
+          &.images-slots-3 img:first-child {
+            grid-column-start: 1;
+            grid-column-end: 3;
+          }
         }
-
-        &.images-slots-3,
-        &.images-slots-4 {
-          grid-template: repeat(2, auto) / repeat(2, 1fr);
-        }
-
-        &.images-slots-3 img:first-child {
-          grid-column-start: 1;
-          grid-column-end: 3;
+  
+  
+        img {
+          width: 100%;
         }
       }
-
-
-      img {
-        width: 100%;
+  
+      .block, .pronunciation {
+        display: block;
+        width: fit-content;
+        padding: 0.625rem;
+        background-color: var(--gray);
+        border-radius: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
       }
-    }
-
-    .block, .pronunciation {
-      display: block;
-      width: fit-content;
-      padding: 0.625rem;
-      background-color: var(--gray);
-      border-radius: 10px;
-      margin-top: 5px;
-      margin-bottom: 5px;
     }
   }
 
   .options-container {
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
+    position: relative;
     display: block;
-    pointer-events: none;
-    padding: calc(var(--body-padding-y) + var(--main-padding)) calc(var(--body-padding-x) + var(--main-padding));
+    padding-top: var(--main-padding);
     
     .options {
       position: relative;
       background-color: var(--grayRgba);
       backdrop-filter: blur(5px);
-      position: absolute;
       display: grid;
       grid-template: auto / auto auto;
       padding: 0.625rem;

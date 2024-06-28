@@ -8,7 +8,7 @@ export default function main () {
   let _actions;
   let _currentBubble;
   let _loop = false;
-  const _chat = document.getElementById('chat');
+  const _chat = document.getElementById('messages');
   const _optionsSecondary = document.getElementById('options-secondary');
   const _optionsPrimary = document.getElementById('options-primary');
 
