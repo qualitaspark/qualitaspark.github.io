@@ -1,4 +1,9 @@
 import { AUTHORS, NODE_TYPES, TEXT_CLASSES, BUBBLE_CLASSES } from "./const.js";
+import { developerExperincePipeline } from "./developerExperience.js";
+import { hrPipeline } from "./hrPipeline.js";
+import { teamPipeline } from "./teamPipeline.js";
+import { techTrendyPipeline } from "./techTrendyPipeline.js";
+import { valuePipeline } from "./valuePipeline.js";
 
 export const actions = [
   {
@@ -11,9 +16,18 @@ export const actions = [
   }
 ];
 
+const pipelines = [
+  ...techTrendyPipeline,
+  ...developerExperincePipeline,
+  ...valuePipeline,
+  ...teamPipeline,
+  ...hrPipeline,
+]
+
 // Every message with AUTHOR.USER MUST only have 1 AUTHOR.AI message as its nexts
 // A AUTHOR.AI message as nexts can have either 1 other AUTHOR.AI message or "n" AUTHOR.USER messages
 export const messages = [
+  pipelines,
   {
     author: AUTHORS.AI,
     id: "oh",
