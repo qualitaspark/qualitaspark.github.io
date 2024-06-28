@@ -193,9 +193,29 @@ text-node {
           }
         }
   
-  
         img {
           width: 100%;
+        }
+      }
+
+      &.bubble-writing {
+        display: flex;
+        gap: 0.3125rem;
+
+        &.bubble-ai .dot{
+          background-color: var(--black);
+        }
+
+        &.bubble-user .dot{
+          background-color: var(--white);
+        }
+
+        .dot {
+          display: block;
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          opacity: 0.2;
         }
       }
   

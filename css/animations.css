@@ -1,3 +1,15 @@
+@keyframes loading {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
 .bubble {
   opacity: 0;
   transform: scale(0);
@@ -14,5 +26,23 @@
   &.in {
     opacity: 1;
     transform: scale(1);
+  }
+
+  &.bubble-writing {
+
+    .dot {
+      animation-name: loading;
+      animation-duration: .6s;
+      animation-delay: .15s;
+      animation-iteration-count: infinite;
+    }
+
+    .dot:nth-child(2) {
+      animation-delay: .3s;
+    }
+
+    .dot:last-child {
+      animation-delay: .45s;
+    }
   }
 }

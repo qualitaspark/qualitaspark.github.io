@@ -10,6 +10,7 @@ export const BUBBLE_CLASSES = {
   BUBBLE: 'bubble',
   BUBBLE_AI: 'bubble-ai',
   BUBBLE_USER: 'bubble-user',
+  BUBBLE_WRITING: 'bubble-writing',
   BUBBLE_BORDER_RADIUS: "bubble-border-radius",
   BUBBLE_IMG: "bubble-img",
   IMAGES: 'images',
@@ -18,6 +19,10 @@ export const BUBBLE_CLASSES = {
   IMAGES_SLOTS_3: 'images-slots-3',
   IMAGES_SLOTS_4: 'images-slots-4',
 }
+
+export const DOT_CLASSES = {
+  DOT: "dot",
+};
 
 export const AUTHORS = {
   AI: "ai",

@@ -1,4 +1,4 @@
-import { ACTIONS_CLASSES, ANIMATIONS_CLASSES, AUTHORS, BTN_CLASSES, NODE_TYPES, TEXT_CLASSES, BUBBLE_CLASSES } from "./const.js";
+import { ACTIONS_CLASSES, ANIMATIONS_CLASSES, AUTHORS, BTN_CLASSES, NODE_TYPES, TEXT_CLASSES, BUBBLE_CLASSES, DOT_CLASSES } from "./const.js";
 import { actions, messages } from "./messages.js"
 
 export default function main () {
@@ -152,64 +152,73 @@ export default function main () {
       .map((action) => _buildAction(action));
   }
 
-  const _appendNext = () => {
-    if (!_currentBubble) {
-      _loop = false;
-      return;
-    }
-
-    let shouldUserDecideNext = false;
-
-    const message = Object.assign(
-      {},
-      _messages.find((message) => _currentBubble.message.nexts?.some((n) => {
-        if (message.message.author === AUTHORS.USER) {
-          shouldUserDecideNext = true;
-        }
-
-        return n === message.message.id;
-      })) || {}
+  const _buildIsWritingBubble = (author) => {
+    const bubble = document.createElement('div');
+    bubble.classList.add(
+      BUBBLE_CLASSES.BUBBLE, 
+      author === AUTHORS.AI ? BUBBLE_CLASSES.BUBBLE_AI : BUBBLE_CLASSES.BUBBLE_USER, 
+      BUBBLE_CLASSES.BUBBLE_WRITING, 
+      ANIMATIONS_CLASSES.IN
     );
+    bubble.id = BUBBLE_CLASSES.BUBBLE_WRITING;
 
-    const bubble = {
-      ...message,
-      node: message?.build(),
+    for (let i = 0; i<3; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add(DOT_CLASSES.DOT);
+      bubble.appendChild(dot);
     }
 
+    return bubble;
+  }
 
-    if (Object.keys(bubble) === 0 || !bubble.build || shouldUserDecideNext) {
+  const _appendNext = () => {
+    const writingBubble = document.getElementById(BUBBLE_CLASSES.BUBBLE_WRITING);
+    writingBubble?.remove();
+
+    if (!_currentBubble || !_currentBubble.build) {
       _loop = false;
-
-      const _userMessages = _messages.reduce(
-        (acc, message) => [
-            ...acc,
-            ...(
-              _currentBubble.message.nexts.some((n) => n === message.message.id) && message.message.author === AUTHORS.USER
-              ? [message.message.id]
-              : []
-            ),
-          ]
-        , []);
-
-      _actions = _buildActions(_userMessages);
-      _actions.forEach((action) => _optionsSecondary.appendChild(action));
-
       return;
     }
+
+    let aiSpeed = _currentBubble.message.waitTime || _aiSpeed;
+    _currentBubble.node = _currentBubble.build();
     
+    _chat.appendChild(_currentBubble.node);
+    _bubbles.push(_currentBubble);
 
-    _chat.appendChild(bubble.node);
-    _bubbles.push(bubble);
-    _currentBubble = bubble;
 
-    setTimeout(() => _appendNext(), _aiSpeed);
+    const next = _getNext(_currentBubble);
+
+    if (next) {
+      _chat.appendChild(_buildIsWritingBubble(next.message.author));
+
+      if (Object.keys(next) === 0 || !next.build || next.message.author === AUTHORS.USER) {
+        _loop = false;
+  
+        const _userMessages = _messages.reduce(
+          (acc, message) => [
+              ...acc,
+              ...(
+                _currentBubble.message.nexts.some((n) => n === message.message.id) && message.message.author === AUTHORS.USER
+                ? [message.message.id]
+                : []
+              ),
+            ]
+          , []);
+  
+        _actions = _buildActions(_userMessages);
+        _actions.forEach((action) => _optionsSecondary.appendChild(action));
+  
+        return;
+      }
+
+      _currentBubble = next;
+    }
+
+    setTimeout(() => _appendNext(), aiSpeed);
   }
 
   function renderLoop () {
-    if (!_loop) {
-      return;
-    }
-
     _bubbles = _bubbles?.flatMap((bubble) => {
       if (!bubble.node.className.includes(ANIMATIONS_CLASSES.IN)) {
         setTimeout(() => {
@@ -227,17 +236,26 @@ export default function main () {
       return bubble;
     });
 
+    if (!_loop) {
+      return;
+    }
+
     requestAnimationFrame(renderLoop);
   }
 
-  const _appendBubbleAndStartLoop = (bubble) => {
-    _chat.appendChild(bubble.node);
+  const _getNext = () => {
+    return _messages.find((message) => _currentBubble.message.nexts?.some((n) => {
+      return n === message.message.id;
+    }))
+  };
+
+  const _appendBubbleAndStartLoop = (bubble, aiSpeed) => {
     _currentBubble = bubble;
 
     _loop = true;
     renderLoop();
 
-    setTimeout(() => _appendNext(), _aiSpeed);
+    setTimeout(() => _appendNext(), aiSpeed || _aiSpeed);
   }
 
   const _emptyActions = () => {
@@ -253,7 +271,7 @@ export default function main () {
 
     _bubbles.push(bubble);
 
-    _appendBubbleAndStartLoop(bubble);
+    _appendBubbleAndStartLoop(bubble, 1);
     _emptyActions();
   }
 
@@ -264,10 +282,13 @@ export default function main () {
       message,
     }));
 
+    const firstMessage = _messages.find((message) => message.id === config?.startId) || _messages[0];
+
     const firstBubble = {
-      ..._messages[0],
-      node: _messages[0].build(),
+      ...firstMessage,
+      node: firstMessage.build(),
     };
+
     _bubbles = [firstBubble];
 
     _appendBubbleAndStartLoop(firstBubble);
@@ -280,5 +301,5 @@ export default function main () {
 
 window.onload = () => {
   const chat = main();
-  chat.init(messages, 'oh');
+  chat.init(messages, {startId: 'oh'});
 }

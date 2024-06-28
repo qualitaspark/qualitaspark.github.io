@@ -18,6 +18,7 @@ export const messages = [
     author: AUTHORS.AI,
     id: "oh",
     nexts: ["ciao"],
+    waitTime: 2000,
     content: {
       type: NODE_TYPES.TEXT,
       content: "Oh 🤗",
@@ -26,6 +27,7 @@ export const messages = [
   {
     author: AUTHORS.AI,
     id: "ciao",
+    waitTime: 5000,
     nexts: ["founders"],
     content: {
       type: NODE_TYPES.TEXT_NODE,
