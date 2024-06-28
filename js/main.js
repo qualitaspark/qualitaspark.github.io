@@ -4,22 +4,16 @@ import './lenis.js';
 
 export default function main () {
   let _aiSpeed = 1300;
+  let _loop = false;
   let _messages;
   let _bubbles;
   let _actions;
   let _currentBubble;
-  let _loop = false;
+  let _userBubbleIsWriting;
   const _chat = document.getElementById('messages');
   const _optionsSecondary = document.getElementById('options-secondary');
   const _optionsPrimary = document.getElementById('options-primary');
-
-  const _handleObserve = (entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.dataset.show = "";
-      }
-    })
-  }
+  const _options = document.getElementById('options');
 
   const _buildBaseNode = (node, element) => {
     Object.keys(node?.otherProps || {})
@@ -158,8 +152,7 @@ export default function main () {
     bubble.classList.add(
       BUBBLE_CLASSES.BUBBLE, 
       author === AUTHORS.AI ? BUBBLE_CLASSES.BUBBLE_AI : BUBBLE_CLASSES.BUBBLE_USER, 
-      BUBBLE_CLASSES.BUBBLE_WRITING, 
-      ANIMATIONS_CLASSES.IN
+      BUBBLE_CLASSES.BUBBLE_WRITING
     );
     bubble.id = BUBBLE_CLASSES.BUBBLE_WRITING;
 
@@ -173,6 +166,7 @@ export default function main () {
   }
 
   const _appendNext = () => {
+    _chat.classList.remove("userIsWritingPlaceholder");
     const writingBubble = document.getElementById(BUBBLE_CLASSES.BUBBLE_WRITING);
     writingBubble?.remove();
 
@@ -190,31 +184,44 @@ export default function main () {
 
     const next = _getNext(_currentBubble);
 
-    if (next) {
-      _chat.appendChild(_buildIsWritingBubble(next.message.author));
+    if (!next || Object.keys(next) === 0 || !next.build ) {
+      _loop = false;
 
-      if (Object.keys(next) === 0 || !next.build || next.message.author === AUTHORS.USER) {
-        _loop = false;
-  
-        const _userMessages = _messages.reduce(
-          (acc, message) => [
-              ...acc,
-              ...(
-                _currentBubble.message.nexts.some((n) => n === message.message.id) && message.message.author === AUTHORS.USER
-                ? [message.message.id]
-                : []
-              ),
-            ]
-          , []);
-  
-        _actions = _buildActions(_userMessages);
-        _actions.forEach((action) => _optionsSecondary.appendChild(action));
-  
-        return;
-      }
-
-      _currentBubble = next;
+      return;
     }
+
+    if (next.message.author === AUTHORS.AI) {
+      const isWritingBubble = _buildIsWritingBubble(next.message.author);
+      _chat.appendChild(isWritingBubble);
+
+      setTimeout(() => {
+        isWritingBubble.classList.add(ANIMATIONS_CLASSES.IN);
+      }, 100);
+    }
+
+    if (next.message.author === AUTHORS.USER) {
+      _loop = false;
+
+      const _userMessages = _messages.reduce(
+        (acc, message) => [
+            ...acc,
+            ...(
+              _currentBubble.message.nexts.some((n) => n === message.message.id) && message.message.author === AUTHORS.USER
+              ? [message.message.id]
+              : []
+            ),
+          ]
+        , []);
+
+      _chat.classList.add("userIsWritingPlaceholder");
+
+      _actions = _buildActions(_userMessages);
+      _actions.forEach((action) => _optionsSecondary.appendChild(action));
+
+      return;
+    }
+
+    _currentBubble = next;
 
     setTimeout(() => _appendNext(), aiSpeed);
   }
@@ -276,6 +283,26 @@ export default function main () {
     _emptyActions();
   }
 
+  const _handleOptionOver = () => {
+    if (_loop) {
+      return;
+    }
+
+    _userBubbleIsWriting = _buildIsWritingBubble(AUTHORS.USER);
+    _chat.appendChild(_userBubbleIsWriting);
+
+    setTimeout(() => {
+      _userBubbleIsWriting.classList.add(ANIMATIONS_CLASSES.IN);
+    }, 100);
+  };
+
+  const _handleOptionLeave = () => {
+    if (_userBubbleIsWriting) {
+      _userBubbleIsWriting.classList.remove(ANIMATIONS_CLASSES.IN);
+      setTimeout(() => _userBubbleIsWriting?.remove(), 300);
+    }
+  };
+
   function init (messages, config) {
     _aiSpeed = config?.aiSpeed || _aiSpeed;
     _messages = messages.map((message) => ({
@@ -291,6 +318,9 @@ export default function main () {
     };
 
     _bubbles = [firstBubble];
+
+    _options.addEventListener('mouseenter', _handleOptionOver);
+    _options.addEventListener('mouseleave', _handleOptionLeave);
 
     _appendBubbleAndStartLoop(firstBubble);
   }

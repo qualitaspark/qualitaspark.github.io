@@ -54,9 +54,20 @@ text-node {
 
 .chat {
   .messages {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 0.3125rem;
+
+    &::after {
+      content: '';
+      display: none;
+      height: 6rem;
+    }
+
+    &.userIsWritingPlaceholder::after {
+      display: block;
+    }
   
     .bubble {
       --bubble-bottom-left-border-radius: var(--border-radius-s);
@@ -101,6 +112,8 @@ text-node {
   
       &.bubble-ai:has(+ .bubble-user),
       &.bubble-user:has(+ .bubble-ai),
+      &.bubble-ai:has(+ .bubble-writing),
+      &.bubble-user:has(+ .bubble-writing),
       &.bubble-ai:last-child,
       &.bubble-user:last-child {
         --bubble-bottom-left-border-radius: var(--border-radius-l);
@@ -200,6 +213,14 @@ text-node {
       &.bubble-writing {
         display: flex;
         gap: 0.3125rem;
+        margin-top: 1.25rem;
+        border-top-left-radius: var(--border-radius-l);
+        border-top-right-radius: var(--border-radius-l);
+
+        &.bubble-user {
+          position: absolute;
+          bottom: 0;
+        }
 
         &.bubble-ai .dot{
           background-color: var(--black);
@@ -247,7 +268,6 @@ text-node {
       bottom: 0;
       width: 100%;
       border-radius: var(--border-radius-l);
-      pointer-events: all;
 
       .options-primary {
         display: flex;
