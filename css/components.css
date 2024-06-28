@@ -157,7 +157,6 @@ text-node {
       }
   
       &.bubble-img {
-        
         .bubble-border-radius {
           border-top-left-radius: var(--bubble-top-left-border-radius);
           border-top-right-radius: var(--bubble-top-right-border-radius);
@@ -172,7 +171,7 @@ text-node {
         .images {
           display: grid;
           width: 100%;
-          gap: 1px;
+          gap: 0.25rem;
   
           &.images-slots-1 {
             grid-template: auto / 1fr;
