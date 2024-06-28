@@ -1,4 +1,4 @@
-import { AUTHORS, NODE_TYPES, TEXT_CLASSES, _AI_BUBBLE_CLASSES } from "./const.js";
+import { AUTHORS, NODE_TYPES, TEXT_CLASSES, BUBBLE_CLASSES } from "./const.js";
 
 export const actions = [
   {
@@ -53,7 +53,7 @@ export const messages = [
     content: [
       {
         type: NODE_TYPES.DIV,
-        classes: [_AI_BUBBLE_CLASSES.BUBBLE_BORDER_RADIUS],
+        classes: [BUBBLE_CLASSES.BUBBLE_BORDER_RADIUS],
         content: [
           {
             type: NODE_TYPES.IMGS,

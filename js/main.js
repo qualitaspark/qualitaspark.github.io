@@ -1,4 +1,4 @@
-import { ACTIONS_CLASSES, ANIMATIONS_CLASSES, AUTHORS, BTN_CLASSES, NODE_TYPES, TEXT_CLASSES, _AI_BUBBLE_CLASSES } from "./const.js";
+import { ACTIONS_CLASSES, ANIMATIONS_CLASSES, AUTHORS, BTN_CLASSES, NODE_TYPES, TEXT_CLASSES, BUBBLE_CLASSES } from "./const.js";
 import { actions, messages } from "./messages.js"
 
 export default function main () {
@@ -70,13 +70,13 @@ export default function main () {
 
   const _buildImgsNode = (node, element) => {
     const imageContainer = document.createElement("div");
-    imageContainer.classList.add(_AI_BUBBLE_CLASSES.IMAGES);
+    imageContainer.classList.add(BUBBLE_CLASSES.IMAGES);
 
     node.content.forEach((child) => imageContainer.appendChild(_buildNode(child, element)));
-    imageContainer.classList.add(_AI_BUBBLE_CLASSES.IMAGES_SLOTS_3)
+    imageContainer.classList.add(BUBBLE_CLASSES.IMAGES_SLOTS_3)
 
     _buildBaseNode(node, imageContainer);
-    element.classList.add(_AI_BUBBLE_CLASSES.BUBBLE_IMG);
+    element.classList.add(BUBBLE_CLASSES.BUBBLE_IMG);
 
     return imageContainer;
   };
@@ -107,10 +107,10 @@ export default function main () {
 
   const _buildBubble = (message) => {
     const bubble = document.createElement("div");
-    bubble.classList.add(_AI_BUBBLE_CLASSES.BUBBLE);
+    bubble.classList.add(BUBBLE_CLASSES.BUBBLE);
 
-    message.author === AUTHORS.AI && bubble.classList.add(_AI_BUBBLE_CLASSES.BUBBLE_AI);
-    message.author === AUTHORS.USER && bubble.classList.add(_AI_BUBBLE_CLASSES.BUBBLE_USER);
+    message.author === AUTHORS.AI && bubble.classList.add(BUBBLE_CLASSES.BUBBLE_AI);
+    message.author === AUTHORS.USER && bubble.classList.add(BUBBLE_CLASSES.BUBBLE_USER);
 
     let body;
 
@@ -188,13 +188,6 @@ export default function main () {
 
 
     if (Object.keys(bubble) === 0 || !bubble.build || shouldUserDecideNext) {
-      // it's time for the user to choose his message
-      // this means getting all the "nexts" from bubbles
-      // building the buttons
-      // pushing the buttons to the list
-      // for each button regist an event handler
-      // and when one is clicked the loop can start back
-
       _loop = false;
 
       const _userMessages = _messages.reduce(
@@ -225,30 +218,32 @@ export default function main () {
   }
 
   function renderLoop () {
-    _bubbles = _bubbles?.flatMap((bubble, index) => {
-      typeof bubble.node.dataset.show === "string" 
+    if (!_loop) {
+      return;
+    }
+
+    _bubbles = _bubbles?.flatMap((bubble) => {
+      typeof bubble.node.dataset.show === "string"
         && !bubble.node.className.includes(ANIMATIONS_CLASSES.IN) 
         && bubble.node.classList.add(ANIMATIONS_CLASSES.IN);
 
       return bubble.node.className.includes(ANIMATIONS_CLASSES.IN) ? [] : bubble;
     });
 
-    if (_loop) {
-      requestAnimationFrame(renderLoop);
-    }
+    requestAnimationFrame(renderLoop);
   }
 
   const _appendBubbleAndStartLoop = (bubble) => {
     _chat.appendChild(bubble.node);
-    _observer.observe(bubble.node);
 
+    _scrollCurrentIntoView(bubble.node);
     _currentBubble = bubble;
-    _currentBubble.node.dataset.show = "";
-
-    setTimeout(() => _appendNext(), _aiSpeed);
+    _observer.observe(bubble.node);
 
     _loop = true;
     renderLoop();
+
+    setTimeout(() => _appendNext(), _aiSpeed);
   }
 
   const _emptyActions = () => {

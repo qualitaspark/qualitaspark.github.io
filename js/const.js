@@ -6,7 +6,7 @@ export const NODE_TYPES = {
   IMG: "img",
 };
 
-export const _AI_BUBBLE_CLASSES = {
+export const BUBBLE_CLASSES = {
   BUBBLE: 'bubble',
   BUBBLE_AI: 'bubble-ai',
   BUBBLE_USER: 'bubble-user',
