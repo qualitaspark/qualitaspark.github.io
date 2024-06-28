@@ -8,4 +8,22 @@
   body {
     padding: var(--body-padding-y) var(--body-padding-x);
   }
+
+  .chat {
+    .bubble {
+      &.bubble-ai::after {
+        left: -0.6rem;
+      }
+  
+      &.bubble-user::after {
+        right: -0.6rem;
+      }
+  
+      &::after {
+        bottom: 0;
+      }
+    }
+  }
+
+
 }
