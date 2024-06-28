@@ -20,10 +20,6 @@ export default function main () {
     })
   }
 
-  const _observer = new IntersectionObserver(_handleObserve, {
-    threshold: [0.3]
-  });
-
   const _buildBaseNode = (node, element) => {
     Object.keys(node?.otherProps || {})
       .filter((key) => key !== 'innerHTML')
@@ -128,12 +124,6 @@ export default function main () {
     return bubble;
   }
 
-  const _scrollCurrentIntoView = (node) => {
-    const _currentMessageRect = node.getBoundingClientRect();
-    const y = _currentMessageRect.top + _currentMessageRect.height + window.scrollY - 20;
-    window.scrollTo({top: y, behavior: 'smooth'});
-  }
-
   const _buildAction = (action) => {
     const option = document.createElement("li");
     option.classList.add(ACTIONS_CLASSES.OPTION);
@@ -209,8 +199,6 @@ export default function main () {
     
 
     _chat.appendChild(bubble.node);
-    _scrollCurrentIntoView(bubble.node);
-    _observer.observe(bubble.node);
     _bubbles.push(bubble);
     _currentBubble = bubble;
 
@@ -223,11 +211,20 @@ export default function main () {
     }
 
     _bubbles = _bubbles?.flatMap((bubble) => {
-      typeof bubble.node.dataset.show === "string"
-        && !bubble.node.className.includes(ANIMATIONS_CLASSES.IN) 
-        && bubble.node.classList.add(ANIMATIONS_CLASSES.IN);
+      if (!bubble.node.className.includes(ANIMATIONS_CLASSES.IN)) {
+        setTimeout(() => {
+          bubble.node.classList.add(ANIMATIONS_CLASSES.IN);
 
-      return bubble.node.className.includes(ANIMATIONS_CLASSES.IN) ? [] : bubble;
+          setTimeout(() => {
+            const _currentMessageRect = bubble.node.getBoundingClientRect();
+            const y = _currentMessageRect.top + _currentMessageRect.height + window.scrollY - 20;
+            window.scrollTo({top: y, behavior: 'smooth'});
+          }, 300)
+        }, 1);
+        return [];
+      }
+
+      return bubble;
     });
 
     requestAnimationFrame(renderLoop);
@@ -235,10 +232,7 @@ export default function main () {
 
   const _appendBubbleAndStartLoop = (bubble) => {
     _chat.appendChild(bubble.node);
-
-    _scrollCurrentIntoView(bubble.node);
     _currentBubble = bubble;
-    _observer.observe(bubble.node);
 
     _loop = true;
     renderLoop();
@@ -284,8 +278,7 @@ export default function main () {
   }
 }
 
-
-document.addEventListener("DOMContentLoaded", () => {
+window.onload = () => {
   const chat = main();
   chat.init(messages, 'oh');
-})
+}
