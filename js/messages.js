@@ -22,12 +22,12 @@ const pipelines = [
   ...valuePipeline,
   ...teamPipeline,
   ...hrPipeline,
-]
+];
 
 // Every message with AUTHOR.USER MUST only have 1 AUTHOR.AI message as its nexts
 // A AUTHOR.AI message as nexts can have either 1 other AUTHOR.AI message or "n" AUTHOR.USER messages
 export const messages = [
-  pipelines,
+  ...pipelines,
   {
     author: AUTHORS.AI,
     id: "oh",
@@ -137,4 +137,4 @@ export const messages = [
       content: "Prova2",
     }
   }
-]
+];
