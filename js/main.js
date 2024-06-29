@@ -139,6 +139,7 @@ export default function main () {
           ));
       }
 
+
       _setCurrentMessage(action.id);
     })
 
@@ -297,7 +298,6 @@ export default function main () {
   }
 
   const _handleOptionOver = () => {
-    console.log(_currentBubble);
     if (_loop || !_currentBubble) {
       return;
     }
