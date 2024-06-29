@@ -10,6 +10,8 @@ export default function main () {
   let _actions;
   let _currentBubble;
   let _userBubbleIsWriting;
+  let _moodQuestions = 0;
+  let _userScore = 0;
   const _chat = document.getElementById('messages');
   const _optionsSecondary = document.getElementById('options-secondary');
   const _optionsPrimary = document.getElementById('options-primary');
@@ -127,6 +129,16 @@ export default function main () {
     btnContainer.classList.add(BTN_CLASSES.BTN, BTN_CLASSES.BTN_SECONDARY);
 
     btnContainer.addEventListener("click", () => {
+      if (/.*-(positive|neutral|negative)$/.test(action.id)) {
+        _moodQuestions++;
+
+        _userScore = Math.log(
+          _userScore + (
+            1.2214027581601699 *  /.*-positive/.test(action.id) +
+            0.8187307530779818 * /.*-negative/.test(action.id)
+          ));
+      }
+
       _setCurrentMessage(action.id);
     })
 
@@ -186,6 +198,7 @@ export default function main () {
 
     if (!next || Object.keys(next) === 0 || !next.build ) {
       _loop = false;
+      _currentBubble = undefined;
 
       return;
     }
@@ -284,7 +297,8 @@ export default function main () {
   }
 
   const _handleOptionOver = () => {
-    if (_loop) {
+    console.log(_currentBubble);
+    if (_loop || !_currentBubble) {
       return;
     }
 
@@ -322,12 +336,32 @@ export default function main () {
     _options.addEventListener('mouseenter', _handleOptionOver);
     _options.addEventListener('mouseleave', _handleOptionLeave);
 
-    _appendBubbleAndStartLoop(firstBubble);
+    if (config.startChatCallback) {
+      config.startChatCallback(() => _appendBubbleAndStartLoop(firstBubble));
+    }
   }
 
   return  {
     init,
   }
+}
+
+const handleStartChatCallback = (startLoop) => {
+  const _loop = () => {
+    if (window._chatStarted) {
+      return;
+    }
+
+    window._chatStarted = true;
+    startLoop();
+  }
+
+  if (document.hasFocus()) {
+    _loop();
+    return;
+  }
+
+  onfocus = _loop();
 }
 
 window.onload = () => {
@@ -345,5 +379,5 @@ window.onload = () => {
   }
 
   requestAnimationFrame(raf);
-  chat.init(messages, {startId: 'oh'});
+  chat.init(messages, {startId: 'oh', startChatCallback: handleStartChatCallback});
 }

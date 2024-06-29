@@ -47,3 +47,11 @@ export const TEXT_CLASSES = {
   ITALIC: "italic",
   PRONUNCIATION: "pronunciation",
 }
+
+export const WAIT_TIME = {
+  S: 500,
+  R: 1000,
+  M: 1200,
+  L: 1500,
+  XL: 2000,
+}
