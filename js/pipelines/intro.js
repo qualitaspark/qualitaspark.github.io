@@ -49,6 +49,10 @@ export const actions = [
     id: "stayLonger-positive",
     content: "Ok, fammi vedere che sai fare",
   },
+  {
+    id: "userValuePipeline",
+    content: "Parlami di te",
+  },
 ];
 
 export const intro = [
@@ -223,10 +227,22 @@ export const intro = [
     author: AUTHORS.AI,
     id: "awesome",
     // TODO
+    nexts: ["userValuePipeline"],
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
       content: "È stupendo",
+    },
+  },
+  {
+    author: AUTHORS.USER,
+    id: "userValuePipeline",
+    // TODO
+    nexts: ["valuePipeline"],
+    waitTime: WAIT_TIME.S,
+    content: {
+      type: NODE_TYPES.TEXT,
+      content: "Parlami di te",
     },
   },
   {
