@@ -50,8 +50,8 @@ export const TEXT_CLASSES = {
 
 export const WAIT_TIME = {
   S: 500,
-  R: 1000,
-  M: 1200,
-  L: 1500,
-  XL: 2000,
+  R: 1200,
+  M: 1500,
+  L: 2000,
+  XL: 2500,
 }

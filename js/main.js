@@ -139,6 +139,7 @@ export default function main () {
           ));
       }
 
+      console.log(_userScore);
 
       _setCurrentMessage(action.id);
     })
@@ -324,7 +325,7 @@ export default function main () {
       message,
     }));
 
-    const firstMessage = _messages.find((message) => message.id === config?.startId) || _messages[0];
+    const firstMessage = _messages.find((message) => message.message.id === config?.startId) || _messages[0];
 
     const firstBubble = {
       ...firstMessage,
