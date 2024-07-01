@@ -122,7 +122,6 @@ export const messages = [
   //               otherProps: {
   //                 alt: "dai, dai, dai! cit: Boris",
   //               }
-  //               }
   //             },
   //             {
   //               type: NODE_TYPES.IMG,
