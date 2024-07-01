@@ -21,7 +21,14 @@ export const actions = [
   },
 ];
 
-const pipelines = [...dx, ...hr];
+const pipelines = [
+  ...hr,
+  ...value,
+  ...team,
+  ...hr,
+  ...developerExperience,
+  ...intro,
+];
 
 // Every message with AUTHOR.USER MUST only have 1 AUTHOR.AI message as its nexts
 // A AUTHOR.AI message as nexts can have either 1 other AUTHOR.AI message or "n" AUTHOR.USER messages
