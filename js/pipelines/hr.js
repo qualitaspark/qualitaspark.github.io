@@ -90,8 +90,7 @@ export const hr = [
   {
     author: AUTHORS.USER,
     id: "prepareSomething",
-    //TODO: Connect Event Pipeline
-    nexts: ["eventPipeline"],
+    nexts: ["teamPipeline"],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -142,7 +141,6 @@ export const hr = [
   {
     author: AUTHORS.USER,
     id: "technologies",
-    // TODO: Connect DX Pipeline
     nexts: ["techPipeline"],
     waitTime: WAIT_TIME.M,
     content: {

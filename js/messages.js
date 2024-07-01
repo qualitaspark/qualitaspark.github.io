@@ -1,14 +1,21 @@
-import { AUTHORS, NODE_TYPES, TEXT_CLASSES, BUBBLE_CLASSES, WAIT_TIME } from "./const.js";
+import {
+  AUTHORS,
+  NODE_TYPES,
+  TEXT_CLASSES,
+  BUBBLE_CLASSES,
+  WAIT_TIME,
+} from "./const.js";
 import { developerExperince } from "./pipelines/developerExperience.js";
 import { hr, actions as hrActions } from "./pipelines/hr.js";
-import { team } from "./pipelines/team.js";
 import { techTrendy } from "./pipelines/techTrendy.js";
 import { value } from "./pipelines/value.js";
 import { intro, actions as introActions } from "./pipelines/intro.js";
+import { team, actions as teamActions } from "./pipelines/team.js";
 
 export const actions = [
   ...introActions,
   ...hrActions,
+  ...teamActions,
   {
     id: "userHrPipeline",
     content: "Ci sarà un team?",
@@ -50,7 +57,7 @@ export const messages = [
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
-      content: "Se volessi contribuire?",
+      content: "Ci sarà un team?",
     },
   },
   // {
@@ -112,14 +119,14 @@ export const messages = [
   //               content: "/assets/images/dai.gif",
   //               otherProps: {
   //                 alt: "dai, dai, dai! cit: Boris",
-  //               } 
+  //               }
   //             },
   //             {
   //               type: NODE_TYPES.IMG,
   //               content: "/assets/images/dai.gif",
   //               otherProps: {
   //                 alt: "dai, dai, dai! cit: Boris",
-  //               } 
+  //               }
   //             },
   //           ]
   //         },
