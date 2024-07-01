@@ -1,9 +1,11 @@
 import { DOM } from "./dom.js";
 
 export class Cursor {
-  constructor(highlightSelector = ".cursor-target-js") {
-    this.setup(highlightSelector);
+  constructor(highlightSelector) {
+    this.highlightSelector = highlightSelector || '.cursor-target-js';
+    this.setup(this.highlightSelector);
   }
+
   setMouseHighlight = (e) => {
     DOM("body").map((el) => el.style.setProperty("--cursor-scale", 2));
     DOM("body").map((el) =>
@@ -22,6 +24,10 @@ export class Cursor {
   storeMouseCoordinates = (e) => {
     DOM("body").map((el) => el.style.setProperty("--x", e.clientX + "px"));
     DOM("body").map((el) => el.style.setProperty("--y", e.clientY + "px"));
+  };
+
+  refresh = () => {
+    this.setup(this.highlightSelector);
   };
 
   setup = (targetSelector) => {

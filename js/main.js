@@ -13,11 +13,12 @@ export default function main () {
   let _userBubbleIsWriting;
   let _moodQuestions = 0;
   let _userScore = 0;
+  let onOptionMount;
   const _chat = document.getElementById('messages');
   const _optionsSecondary = document.getElementById('options-secondary');
   const _optionsPrimary = document.getElementById('options-primary');
   const _options = document.getElementById('options');
-  const cleanUpCursorEvents = new Cursor();;
+
 
   const _buildBaseNode = (node, element) => {
     Object.keys(node?.otherProps || {})
@@ -125,7 +126,7 @@ export default function main () {
 
   const _buildAction = (action) => {
     const option = document.createElement("li");
-    option.classList.add(ACTIONS_CLASSES.OPTION);
+    option.classList.add(ACTIONS_CLASSES.OPTION, ACTIONS_CLASSES.MOUSE_HOVER);
 
     const btnContainer = document.createElement("div");
     btnContainer.classList.add(BTN_CLASSES.BTN, BTN_CLASSES.BTN_SECONDARY);
@@ -147,11 +148,9 @@ export default function main () {
     })
 
     const span = document.createElement("span");
-    const a = document.createElement("a");
 
     span.appendChild(document.createTextNode(action.content));
     btnContainer.appendChild(span);
-    btnContainer.appendChild(a);
     option.appendChild(btnContainer);
 
     return option;
@@ -234,7 +233,7 @@ export default function main () {
 
       _actions = _buildActions(_userMessages);
       _actions.forEach((action) => _optionsSecondary.appendChild(action));
-
+      setTimeout(() => onOptionMount && onOptionMount(), 100)
       return;
     }
 
@@ -301,10 +300,9 @@ export default function main () {
   }
 
   const _handleOptionOver = () => {
-    if (_loop || !_currentBubble) {
+    if (_loop || !_currentBubble || _userBubbleIsWriting) {
       return;
     }
-
     _userBubbleIsWriting = _buildIsWritingBubble(AUTHORS.USER);
     _chat.appendChild(_userBubbleIsWriting);
 
@@ -316,16 +314,20 @@ export default function main () {
   const _handleOptionLeave = () => {
     if (_userBubbleIsWriting) {
       _userBubbleIsWriting.classList.remove(ANIMATIONS_CLASSES.IN);
-      setTimeout(() => _userBubbleIsWriting?.remove(), 300);
+      setTimeout(() => {
+        _userBubbleIsWriting?.remove()
+        _userBubbleIsWriting = undefined;
+      }, 300);
     }
   };
-
+ // On option mount
   function init (messages, config) {
     _aiSpeed = config?.aiSpeed || _aiSpeed;
     _messages = messages.map((message) => ({
       build: () => _buildBubble(message),
       message,
     }));
+    onOptionMount = config?.onOptionMount;
 
     const firstMessage = _messages.find((message) => message.message.id === config?.startId) || _messages[0];
 
@@ -380,7 +382,10 @@ window.onload = () => {
     lenis.raf(time);
     requestAnimationFrame(raf);
   }
+  const cursor = new Cursor();
 
   requestAnimationFrame(raf);
-  chat.init(messages, {startId: 'oh', startChatCallback: handleStartChatCallback});
+  chat.init(messages, {startId: 'oh', startChatCallback: handleStartChatCallback, onOptionMount: () => {
+    console.log('called callback')
+    cursor.refresh()}});
 }
