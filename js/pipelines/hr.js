@@ -1,3 +1,28 @@
+import { AUTHORS, NODE_TYPES, WAIT_TIME } from "../const.js";
+
+export const actions = [
+  {
+    id: "knowNothing",
+    content: "Non so nulla di AI",
+  },
+  {
+    id: "prepareSomething",
+    content: "Devo preparare qualcosa?",
+  },
+  {
+    id: "who",
+    content: "Ma in questo team chi troverò? 🤌🏻",
+  },
+  {
+    id: "goodAtCSS",
+    content: "Chi sono gli altri?",
+  },
+  {
+    id: "technologies",
+    content: "Ma quali tecnologie utilizzeremo?! 😱",
+  },
+];
+
 export const hr = [
   {
     author: AUTHORS.AI,
@@ -48,7 +73,7 @@ export const hr = [
     waitTime: WAIT_TIME.L,
     content: {
       type: NODE_TYPES.TEXT,
-      content: "Neanche noi siamo  esperti di IA e non serve che tu lo sia ✅",
+      content: "Neanche noi siamo esperti di IA e non serve che tu lo sia ✅",
     },
   },
   {
@@ -66,7 +91,7 @@ export const hr = [
     author: AUTHORS.USER,
     id: "prepareSomething",
     //TODO: Connect Event Pipeline
-    nexts: [""],
+    nexts: ["eventPipeline"],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -97,7 +122,7 @@ export const hr = [
   {
     author: AUTHORS.USER,
     id: "goodAtCSS",
-    nexts: [""],
+    nexts: ["ourCoMentor"],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -106,7 +131,7 @@ export const hr = [
   },
   {
     author: AUTHORS.AI,
-    id: "ourMentor",
+    id: "ourCoMentor",
     nexts: ["prepareSomething"],
     waitTime: WAIT_TIME.R,
     content: {
@@ -118,7 +143,7 @@ export const hr = [
     author: AUTHORS.USER,
     id: "technologies",
     // TODO: Connect DX Pipeline
-    nexts: [""],
+    nexts: ["techPipeline"],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
