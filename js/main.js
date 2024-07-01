@@ -142,7 +142,6 @@ export default function main () {
           ));
       }
 
-      console.log(_userScore);
 
       _setCurrentMessage(action.id);
     })
@@ -386,6 +385,5 @@ window.onload = () => {
 
   requestAnimationFrame(raf);
   chat.init(messages, {startId: 'oh', startChatCallback: handleStartChatCallback, onOptionMount: () => {
-    console.log('called callback')
     cursor.refresh()}});
 }
