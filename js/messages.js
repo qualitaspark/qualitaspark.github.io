@@ -4,37 +4,36 @@ import {
   TEXT_CLASSES,
   BUBBLE_CLASSES,
   WAIT_TIME,
-} from "./const.js";
-import { developerExperince } from "./pipelines/developerExperience.js";
-import { hr, actions as hrActions } from "./pipelines/hr.js";
+} from './const.js';
+import { developerExperince } from './pipelines/developerExperience.js';
+import { hr, actions as hrActions } from './pipelines/hr.js';
 
-import { techTrendy } from "./pipelines/techTrendy.js";
-import { value } from "./pipelines/value.js";
-import { intro, actions as introActions } from "./pipelines/intro.js";
-import { team, actions as teamActions } from "./pipelines/team.js";
+import { techTrendy } from './pipelines/techTrendy.js';
+import { value } from './pipelines/value.js';
+import { intro, actions as introActions } from './pipelines/intro.js';
+import { team, actions as teamActions } from './pipelines/team.js';
 
 export const actions = [
   ...introActions,
   ...hrActions,
+  ...developerExperienceActions,
   ...teamActions,
-
   {
-    id: "userHrPipeline",
-    content: "Ci sarà un team?",
+    id: 'userHrPipeline',
+    content: 'Ci sarà un team?',
   },
   {
-    id: "userValuePipeline",
-    content: "Parlami di te",
+    id: 'userValuePipeline',
+    content: 'Parlami di te',
   },
 ];
 
 const pipelines = [
-  ...techTrendy,
-  ...developerExperince,
   ...hr,
   ...value,
   ...team,
   ...hr,
+  ...developerExperience,
   ...intro,
 ];
 
@@ -44,22 +43,23 @@ export const messages = [
   ...pipelines,
   {
     author: AUTHORS.USER,
-    id: "userValuePipeline",
-    nexts: ["valuePipeline"],
+    id: 'userValuePipeline',
+    nexts: ['valuePipeline'],
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
-      content: "Parlami di te",
+      content: 'Parlami di te',
     },
   },
   {
     author: AUTHORS.USER,
-    id: "userHrPipeline",
-    nexts: ["hrPipeline"],
+    id: 'userHrPipeline',
+    nexts: ['hrPipeline'],
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
-      content: "Ci sarà un team?",
+      content: 'Se volessi contribuire?',
+      content: 'Ci sarà un team?',
     },
   },
   // {
@@ -122,12 +122,14 @@ export const messages = [
   //               otherProps: {
   //                 alt: "dai, dai, dai! cit: Boris",
   //               }
+  //               }
   //             },
   //             {
   //               type: NODE_TYPES.IMG,
   //               content: "/assets/images/dai.gif",
   //               otherProps: {
   //                 alt: "dai, dai, dai! cit: Boris",
+  //               }
   //               }
   //             },
   //           ]

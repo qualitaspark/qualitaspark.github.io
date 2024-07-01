@@ -1,4 +1,4 @@
-import { Maybe } from "./maybe.js";
+import { Maybe } from './maybe.js';
 
 /*
  * DOM always store elements in the Maybe monad.
@@ -20,17 +20,17 @@ export const DOM = (selector, el) => {
    */
   const element =
     el && el !== null
-      ? el?._tag === "Just"
+      ? el?._tag === 'Just'
         ? el
         : Nothing
       : Maybe(document.querySelector(selector));
 
   return {
     element: element,
-    _tag: "DOM",
-    from: (selector) => DOM(selector),
-    map: (f) => element.map(f),
-    flatMap: (f) => element.map(f),
-    identity: (DOM) => DOM,
+    _tag: 'DOM',
+    from: selector => DOM(selector),
+    map: f => element.map(f),
+    flatMap: f => element.map(f),
+    identity: DOM => DOM,
   };
 };
