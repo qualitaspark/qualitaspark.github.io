@@ -1,6 +1,6 @@
-import { AUTHORS, NODE_TYPES, TEXT_CLASSES, BUBBLE_CLASSES } from "./const.js";
+import { AUTHORS, NODE_TYPES, TEXT_CLASSES, BUBBLE_CLASSES, WAIT_TIME } from "./const.js";
 import { developerExperince } from "./pipelines/developerExperience.js";
-import { hr } from "./pipelines/hr.js";
+import { hr, actions as hrActions } from "./pipelines/hr.js";
 import { team } from "./pipelines/team.js";
 import { techTrendy } from "./pipelines/techTrendy.js";
 import { value } from "./pipelines/value.js";
@@ -8,14 +8,15 @@ import { intro, actions as introActions } from "./pipelines/intro.js";
 
 export const actions = [
   ...introActions,
+  ...hrActions,
   {
-    id: "prova",
-    content: "Ciao!",
+    id: "userHrPipeline",
+    content: "Ci sarà un team?",
   },
   {
-    id: "prova2",
-    content: "Interessante!",
-  }
+    id: "userValuePipeline",
+    content: "Parlami di te",
+  },
 ];
 
 const pipelines = [
@@ -32,6 +33,26 @@ const pipelines = [
 // A AUTHOR.AI message as nexts can have either 1 other AUTHOR.AI message or "n" AUTHOR.USER messages
 export const messages = [
   ...pipelines,
+  {
+    author: AUTHORS.USER,
+    id: "userValuePipeline",
+    nexts: ["valuePipeline"],
+    waitTime: WAIT_TIME.S,
+    content: {
+      type: NODE_TYPES.TEXT,
+      content: "Parlami di te",
+    },
+  },
+  {
+    author: AUTHORS.USER,
+    id: "userHrPipeline",
+    nexts: ["hrPipeline"],
+    waitTime: WAIT_TIME.S,
+    content: {
+      type: NODE_TYPES.TEXT,
+      content: "Se volessi contribuire?",
+    },
+  },
   // {
   //   author: AUTHORS.AI,
   //   id: "oh",
