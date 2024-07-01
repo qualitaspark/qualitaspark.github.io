@@ -1,5 +1,6 @@
 import { ACTIONS_CLASSES, ANIMATIONS_CLASSES, AUTHORS, BTN_CLASSES, NODE_TYPES, TEXT_CLASSES, BUBBLE_CLASSES, DOT_CLASSES } from "./const.js";
 import { actions, messages } from "./messages.js"
+import { Cursor } from "./cursor.js";
 import './lenis.js';
 
 export default function main () {
@@ -16,6 +17,7 @@ export default function main () {
   const _optionsSecondary = document.getElementById('options-secondary');
   const _optionsPrimary = document.getElementById('options-primary');
   const _options = document.getElementById('options');
+  const cleanUpCursorEvents = new Cursor();;
 
   const _buildBaseNode = (node, element) => {
     Object.keys(node?.otherProps || {})
