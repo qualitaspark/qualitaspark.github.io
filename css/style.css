@@ -35,10 +35,10 @@ body {
   width: var(--cursor-size);
   height: var(--cursor-size);
   border-radius: 50%;
-  background-color: #ffffffdb;
+  background-color: var(--primary);
   pointer-events: none;
   transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
-  mix-blend-mode: difference;
+  mix-blend-mode: hard-light;
   will-change: transform;
   overflow: hidden;
   z-index: 1000;

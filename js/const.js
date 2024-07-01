@@ -36,6 +36,7 @@ export const ANIMATIONS_CLASSES = {
 
 export const ACTIONS_CLASSES = {
   OPTION: "option",
+  MOUSE_HOVER: "cursor-target-js",
 }
 
 export const BTN_CLASSES = {
