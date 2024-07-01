@@ -26,7 +26,7 @@ export const actions = [
 export const hr = [
   {
     author: AUTHORS.AI,
-    id: 'hrPipeline',
+    id: 'hr.hrPipeline',
     nexts: ['noFear'],
     waitTime: WAIT_TIME.R,
     content: {
@@ -141,7 +141,6 @@ export const hr = [
   {
     author: AUTHORS.USER,
     id: 'technologies',
-    // TODO: Connect DX Pipeline
     nexts: ['techPipeline'],
     waitTime: WAIT_TIME.M,
     content: {

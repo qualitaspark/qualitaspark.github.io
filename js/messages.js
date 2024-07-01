@@ -1,14 +1,7 @@
-import {
-  AUTHORS,
-  NODE_TYPES,
-  TEXT_CLASSES,
-  BUBBLE_CLASSES,
-  WAIT_TIME,
-} from './const.js';
-import { developerExperince } from './pipelines/developerExperience.js';
+import { AUTHORS, NODE_TYPES, WAIT_TIME } from './const.js';
+import { dx, actions as dxActions } from './pipelines/dx.js';
 import { hr, actions as hrActions } from './pipelines/hr.js';
 
-import { techTrendy } from './pipelines/techTrendy.js';
 import { value } from './pipelines/value.js';
 import { intro, actions as introActions } from './pipelines/intro.js';
 import { team, actions as teamActions } from './pipelines/team.js';
@@ -16,7 +9,7 @@ import { team, actions as teamActions } from './pipelines/team.js';
 export const actions = [
   ...introActions,
   ...hrActions,
-  ...developerExperienceActions,
+  ...dxActions,
   ...teamActions,
   {
     id: 'userHrPipeline',
@@ -28,14 +21,7 @@ export const actions = [
   },
 ];
 
-const pipelines = [
-  ...hr,
-  ...value,
-  ...team,
-  ...hr,
-  ...developerExperience,
-  ...intro,
-];
+const pipelines = [...dx, ...hr];
 
 // Every message with AUTHOR.USER MUST only have 1 AUTHOR.AI message as its nexts
 // A AUTHOR.AI message as nexts can have either 1 other AUTHOR.AI message or "n" AUTHOR.USER messages

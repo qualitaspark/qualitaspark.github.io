@@ -38,7 +38,8 @@ text-node {
     }
   }
 
-  &.italic, &.pronunciation {
+  &.italic,
+  &.pronunciation {
     font-family: 'pp_right_grotesk_monoRgIt';
 
     text-node.bold {
@@ -50,7 +51,6 @@ text-node {
     font-family: 'pp_right_grotesk_monoBdIt';
   }
 }
-
 
 .chat {
   .messages {
@@ -68,7 +68,7 @@ text-node {
     &.userIsWritingPlaceholder::after {
       display: block;
     }
-  
+
     .bubble {
       --bubble-bottom-left-border-radius: var(--border-radius-s);
       --bubble-bottom-left-border-radius: var(--border-radius-s);
@@ -83,14 +83,14 @@ text-node {
       font-size: 3rem;
       width: fit-content;
       font-family: 'pp_right_grotesk_monoregular';
-  
+
       &::after {
         bottom: -0.0625rem;
         border-style: solid;
         border-width: 0.625rem;
         border: 0.625rem solid transparent;
       }
-  
+
       &:first-child {
         --bubble-top-left-border-radius: var(--border-radius-l);
         --bubble-top-right-border-radius: var(--border-radius-l);
@@ -98,18 +98,18 @@ text-node {
         border-top-left-radius: var(--bubble-top-left-border-radius);
         border-top-right-radius: var(--bubble-top-right-border-radius);
       }
-  
-      &.bubble-ai+&.bubble-user,
-      &.bubble-user+&.bubble-ai {
+
+      &.bubble-ai + &.bubble-user,
+      &.bubble-user + &.bubble-ai {
         --bubble-top-left-border-radius: var(--border-radius-l);
         --bubble-top-right-border-radius: var(--border-radius-l);
 
         border-top-left-radius: var(--bubble-top-left-border-radius);
         border-top-right-radius: var(--bubble-top-right-border-radius);
-        
-        margin-top: 1.250rem;
+
+        margin-top: 1.25rem;
       }
-  
+
       &.bubble-ai:has(+ .bubble-user),
       &.bubble-user:has(+ .bubble-ai),
       &.bubble-ai:has(+ .bubble-writing),
@@ -121,7 +121,7 @@ text-node {
 
         border-bottom-left-radius: var(--bubble-bottom-left-border-radius);
         border-bottom-right-radius: var(--bubble-bottom-right-border-radius);
-  
+
         &::after {
           content: '';
           display: block;
@@ -131,80 +131,85 @@ text-node {
           border-top-width: 0.625rem;
         }
       }
-  
+
       &.bubble-ai:has(+ .bubble-user)::after,
       &.bubble-ai:last-child::after {
         border-top-color: var(--gray-light);
       }
-  
+
       &.bubble-user:has(+ .bubble-ai)::after,
       &.bubble-user:last-child::after {
         border-top-color: var(--primary);
       }
-  
+
       &.bubble-ai {
         background-color: var(--gray-light);
-  
+
+        img {
+          width: 100%;
+        }
+
         &::after {
           left: -0.75rem;
           transform-origin: center bottom;
           transform: rotateZ(45deg);
         }
       }
-  
+
       &.bubble-user {
         align-self: flex-end;
         background-color: var(--primary);
         color: var(--white);
         font-family: 'pp_right_grotesk_monomedium';
-  
+
         &::after {
           right: -0.75rem;
           transform-origin: center bottom;
           transform: rotateZ(-45deg);
         }
       }
-  
+
       &:not(.bubble-img) {
         padding: 1.875rem;
       }
-  
+
       &.bubble-img {
         .bubble-border-radius {
           border-top-left-radius: var(--bubble-top-left-border-radius);
           border-top-right-radius: var(--bubble-top-right-border-radius);
           overflow: hidden;
         }
-  
-        p, & > text-node {
+
+        p,
+        & > text-node {
           display: inline-block;
           padding: 1.875rem;
         }
-  
+
         .images {
           display: grid;
           width: 100%;
           gap: 0.25rem;
-  
+
           &.images-slots-1 {
             grid-template: auto / 1fr;
           }
-  
+
           &.images-slots-2 {
             grid-template: repeat(2, auto) / 1fr;
           }
-  
+
           &.images-slots-3,
           &.images-slots-4 {
             grid-template: repeat(2, auto) / repeat(2, 1fr);
           }
-  
+
           &.images-slots-3 img:first-child {
             grid-column-start: 1;
             grid-column-end: 3;
           }
         }
-  
+
         img {
           width: 100%;
         }
@@ -222,11 +227,11 @@ text-node {
           bottom: 0;
         }
 
-        &.bubble-ai .dot{
+        &.bubble-ai .dot {
           background-color: var(--black);
         }
 
-        &.bubble-user .dot{
+        &.bubble-user .dot {
           background-color: var(--white);
         }
 
@@ -238,8 +243,9 @@ text-node {
           opacity: 0.2;
         }
       }
-  
-      .block, .pronunciation {
+
+      .block,
+      .pronunciation {
         display: block;
         width: fit-content;
         padding: 0.625rem;
@@ -255,7 +261,7 @@ text-node {
     position: relative;
     display: block;
     padding-top: var(--main-padding);
-    
+
     .options {
       position: relative;
       background-color: var(--grayRgba);
