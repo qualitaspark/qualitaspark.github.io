@@ -17,15 +17,7 @@ export default function main () {
   const _optionsSecondary = document.getElementById('options-secondary');
   const _optionsPrimary = document.getElementById('options-primary');
   const _options = document.getElementById('options');
-  const cleanUpCursorEvents = new Cursor();
-
-  const _handleObserve = (entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.dataset.show = "";
-      }
-    })
-  }
+  const cleanUpCursorEvents = new Cursor();;
 
   const _buildBaseNode = (node, element) => {
     Object.keys(node?.otherProps || {})

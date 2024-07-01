@@ -37,7 +37,7 @@ body {
   border-radius: 50%;
   background-color: #ffffffdb;
   pointer-events: none;
-  transition: all 0.1s ease-out;
+  transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
   mix-blend-mode: difference;
   will-change: transform;
   overflow: hidden;
