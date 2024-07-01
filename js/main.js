@@ -319,7 +319,6 @@ export default function main () {
       }, 300);
     }
   };
- // On option mount
   function init (messages, config) {
     _aiSpeed = config?.aiSpeed || _aiSpeed;
     _messages = messages.map((message) => ({
