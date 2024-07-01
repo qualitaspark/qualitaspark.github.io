@@ -2,18 +2,19 @@
   --gray-light: #f2f2f2;
   --white: #fff;
   --black: #202020;
-  --primary: #EB6A0C;
-  --primary-light: #F29E61;
+  --primary: #eb6a0c;
+  --primary-light: #f29e61;
   --border-radius-l: 2.5rem;
   --border-radius-m: 1.25rem;
   --border-radius-s: 0.625rem;
-  --gray: #E7E6E6;
+  --gray: #e7e6e6;
   --grayRgba: rgba(231, 230, 230, 0.9);
   --main-max-width: 40rem;
   --main-padding: 1.875rem;
   --body-padding-y: 3.75rem;
   --body-padding-x: 12.5rem;
-  font-family: 'pp_right_grotesk_monobold';
+  --cursor-size: 20px;
+  font-family: "pp_right_grotesk_monobold";
   font-size: 16px;
 }
 
@@ -22,6 +23,29 @@ body {
   color: var(--black);
 
   padding: var(--body-padding-y) var(--body-padding-x);
+  --cursor-scale: 1;
+  --cursor-text: "";
+}
+
+#cursor {
+  position: fixed;
+  top: calc((var(--cursor-size) / 2) * -1);
+  left: calc((var(--cursor-size) / 2) * -1);
+  transform: translate(var(--x), var(--y)) scale(var(--cursor-scale));
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  border-radius: 50%;
+  background-color: var(--primary);
+  pointer-events: none;
+  transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  mix-blend-mode: hard-light;
+  will-change: transform;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+[data-cursor-text] > * {
+  pointer-events: none;
 }
 
 bg-image-container {
@@ -37,12 +61,12 @@ bg-image-container {
     left: 50%;
     top: 50%;
     transform: translate(-10%, -50%);
-    z-index: 0; 
+    z-index: 0;
     opacity: 0.2;
 
     #bg-logo-image {
       width: 100%;
-      background-image: url('/assets/logo.svg');
+      background-image: url("/assets/logo.svg");
       background-size: cover;
       width: 500px;
       height: 500px;
@@ -50,7 +74,7 @@ bg-image-container {
 
     #bg-logotype-image {
       width: 100%;
-      background-image: url('/assets/logotipo.svg');
+      background-image: url("/assets/logotipo.svg");
       background-size: cover;
       width: 1764px;
       height: 500px;

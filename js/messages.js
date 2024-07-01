@@ -7,6 +7,7 @@ import {
 } from "./const.js";
 import { developerExperince } from "./pipelines/developerExperience.js";
 import { hr, actions as hrActions } from "./pipelines/hr.js";
+
 import { techTrendy } from "./pipelines/techTrendy.js";
 import { value } from "./pipelines/value.js";
 import { intro, actions as introActions } from "./pipelines/intro.js";
@@ -16,6 +17,7 @@ export const actions = [
   ...introActions,
   ...hrActions,
   ...teamActions,
+
   {
     id: "userHrPipeline",
     content: "Ci sarà un team?",
