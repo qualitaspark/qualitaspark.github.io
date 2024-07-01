@@ -26,14 +26,16 @@ block-relative {
     left: 0;
   }
 }
-
-text-node {
-  display: inline;
+.subtitle-container {
+  overflow: hidden;
+}
+.text-node {
+  display: block;
 
   &.bold {
     font-family: 'pp_right_grotesk_monobold';
 
-    text-node.italic {
+    .text-node.italic {
       font-family: 'pp_right_grotesk_monoBdIt';
     }
   }
@@ -41,8 +43,13 @@ text-node {
   &.italic,
   &.pronunciation {
     font-family: 'pp_right_grotesk_monoRgIt';
+    animation-name: stagger-title;
+    animation-duration: 1.2s;
+    animation-delay: 2s;
+    transform: translate3d(0, 200px, 0);
+    animation-fill-mode: forwards;
 
-    text-node.bold {
+    .text-node.bold {
       font-family: 'pp_right_grotesk_monoBdIt';
     }
   }
