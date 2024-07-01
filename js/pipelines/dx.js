@@ -305,6 +305,4 @@ export const dx = [
       content: 'Voglio contribuire ma non mi sento sicuro',
     },
   },
-
-  // TODO: NEXT PIPELINE
 ];
