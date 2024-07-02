@@ -14,16 +14,20 @@
       &.bubble-ai::after {
         left: -0.6rem;
       }
-  
+
       &.bubble-user::after {
         right: -0.6rem;
       }
-  
+
       &::after {
         bottom: 0;
       }
     }
   }
+}
 
-
+@media (max-width: 600px) {
+  #cursor {
+    display: none !important;
+  }
 }
