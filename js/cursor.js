@@ -1,13 +1,16 @@
 import { DOM } from './dom.js';
 
 export class Cursor {
-  constructor(highlightSelector) {
+  constructor(highlightSelector, cursorHighlightScaleFactor) {
     this.highlightSelector = highlightSelector || '.cursor-target-js';
+    this.cursorHighlightScaleFactor = cursorHighlightScaleFactor || 2.5;
     this.setup(this.highlightSelector);
   }
 
   setMouseHighlight = e => {
-    DOM('body').map(el => el.style.setProperty('--cursor-scale', 2));
+    DOM('body').map(el =>
+      el.style.setProperty('--cursor-scale', this.cursorHighlightScaleFactor)
+    );
     DOM('body').map(el =>
       el.style.setProperty(
         '--cursor-text',
