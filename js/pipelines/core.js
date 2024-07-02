@@ -15,7 +15,7 @@ export const corePipelinesActions = [
   },
   {
     id: 'team.userTeamPipeline',
-    content: 'Nel team chi ci sarà?',
+    content: 'Che cosa mi serve?',
   },
 ];
 
@@ -57,7 +57,7 @@ export const corePipelinesMessages = [
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
-      content: 'Nel team chi ci sarà?',
+      content: 'Che cosa mi serve?',
     },
   },
 ];

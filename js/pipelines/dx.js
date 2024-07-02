@@ -1,4 +1,10 @@
-import { AUTHORS, NODE_TYPES, WAIT_TIME } from '../const.js';
+import {
+  AUTHORS,
+  BUBBLE_CLASSES,
+  NODE_TYPES,
+  TEXT_CLASSES,
+  WAIT_TIME,
+} from '../const.js';
 export const actions = [
   {
     id: 'dx.iWantToKnowAllTheStack',
@@ -145,29 +151,35 @@ export const dx = [
   {
     author: AUTHORS.AI,
     id: 'dx.completeStack-0-meme',
-    nexts: ['dx.completeStack-0-ok'],
-    waitTime: WAIT_TIME.M,
-    content: {
-      type: NODE_TYPES.IMGS,
-      classes: ['bubble-img'],
-      content: [
-        {
-          type: NODE_TYPES.IMG,
-          content: './../../assets/images/29xp-meme-articleLarge-v3.webp',
-        },
-      ],
-    },
-  },
-  {
-    author: AUTHORS.AI,
-    id: 'dx.completeStack-0-ok',
     nexts: ['dx.completeStack-1'],
     waitTime: WAIT_TIME.M,
-    content: {
-      type: NODE_TYPES.TEXT,
-      content:
-        'Eh va bene...😅.\n Tiè.\n Beccate.\n Guarda che robetta che acchittiamo:',
-    },
+    content: [
+      {
+        type: NODE_TYPES.DIV,
+        classes: [BUBBLE_CLASSES.BUBBLE_BORDER_RADIUS],
+        content: [
+          {
+            type: NODE_TYPES.IMGS,
+            classes: ['bubble-img'],
+            content: [
+              {
+                type: NODE_TYPES.IMG,
+                content: './../../assets/images/29xp-meme-articleLarge-v3.webp',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: NODE_TYPES.TEXT_NODE,
+        content: {
+          type: NODE_TYPES.TEXT,
+          content:
+            'Eh va bene...😅.\n Tiè.\n Beccate.\n Guarda che robetta che acchittiamo:',
+        },
+        classes: [],
+      },
+    ],
   },
   {
     author: AUTHORS.AI,
@@ -299,7 +311,7 @@ export const dx = [
   {
     author: AUTHORS.AI,
     id: 'dx.hihi',
-    nexts: ['dx.gotoHr'],
+    nexts: ['dx.gotoHr', 'team.userTeamPipeline'],
     waitTime: WAIT_TIME.L,
     content: {
       type: NODE_TYPES.TEXT,

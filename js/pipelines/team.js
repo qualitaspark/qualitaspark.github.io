@@ -188,7 +188,7 @@ export const team = [
   {
     author: AUTHORS.AI,
     id: 'team.ourCoMentor',
-    nexts: ['hr.prepareSomething'],
+    nexts: ['hr.userHrPipeline'],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,

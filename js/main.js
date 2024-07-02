@@ -174,6 +174,7 @@ export default function main() {
 
   const _buildActions = messages => {
     const includePipelines = messages.some(id => id.includes('Pipeline'));
+
     let _messages = includePipelines
       ? [
           ...new Map(
@@ -181,12 +182,14 @@ export default function main() {
           ).values(),
         ]
       : messages;
+
     const _actions = actions
-      .filter(
-        ({ id }) =>
+      .filter(({ id }) => {
+        return (
           _messages.some(msgId => msgId === id) &&
-          !_choosedActions.some(cA => cA === id)
-      )
+          (!includePipelines || !_choosedActions.some(cA => cA === id))
+        );
+      })
       .map(action => _buildAction(action));
 
     if (_actions.length === 0 && includePipelines) {
