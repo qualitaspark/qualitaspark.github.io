@@ -119,7 +119,7 @@ export const team = [
   {
     author: AUTHORS.USER,
     id: "technologies",
-    nexts: ["techPipeline"],
+    nexts: ["dx.dxPipeline"],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
