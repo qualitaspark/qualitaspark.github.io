@@ -5,56 +5,27 @@ import { hr, actions as hrActions } from './pipelines/hr.js';
 import { value } from './pipelines/value.js';
 import { intro, actions as introActions } from './pipelines/intro.js';
 import { team, actions as teamActions } from './pipelines/team.js';
+import {
+  corePipelinesActions,
+  corePipelinesMessages,
+} from './pipelines/core.js';
+import { exit } from './pipelines/exit.js';
 
 export const actions = [
+  ...corePipelinesActions,
   ...introActions,
   ...hrActions,
   ...dxActions,
   ...teamActions,
-  {
-    id: 'userHrPipeline',
-    content: 'Ci sarà un team?',
-  },
-  {
-    id: 'userValuePipeline',
-    content: 'Parlami di te',
-  },
 ];
 
-const pipelines = [
-  ...hr,
-  ...value,
-  ...team,
-  ...hr,
-  ...developerExperience,
-  ...intro,
-];
+const pipelines = [...hr, ...value, ...team, ...hr, ...intro, ...dx, ...exit];
 
 // Every message with AUTHOR.USER MUST only have 1 AUTHOR.AI message as its nexts
 // A AUTHOR.AI message as nexts can have either 1 other AUTHOR.AI message or "n" AUTHOR.USER messages
 export const messages = [
   ...pipelines,
-  {
-    author: AUTHORS.USER,
-    id: 'userValuePipeline',
-    nexts: ['valuePipeline'],
-    waitTime: WAIT_TIME.S,
-    content: {
-      type: NODE_TYPES.TEXT,
-      content: 'Parlami di te',
-    },
-  },
-  {
-    author: AUTHORS.USER,
-    id: 'userHrPipeline',
-    nexts: ['hrPipeline'],
-    waitTime: WAIT_TIME.S,
-    content: {
-      type: NODE_TYPES.TEXT,
-      content: 'Se volessi contribuire?',
-      content: 'Ci sarà un team?',
-    },
-  },
+  ...corePipelinesMessages,
   // {
   //   author: AUTHORS.AI,
   //   id: "oh",

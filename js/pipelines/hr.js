@@ -2,23 +2,23 @@ import { AUTHORS, NODE_TYPES, WAIT_TIME } from '../const.js';
 
 export const actions = [
   {
-    id: 'knowNothing',
+    id: 'hr.knowNothing',
     content: 'Non so nulla di AI',
   },
   {
-    id: 'prepareSomething',
+    id: 'hr.prepareSomething',
     content: 'Devo preparare qualcosa?',
   },
   {
-    id: 'who',
+    id: 'hr.who',
     content: 'Ma in questo team chi troverò? 🤌🏻',
   },
   {
-    id: 'goodAtCSS',
+    id: 'hr.goodAtCSS',
     content: 'Chi sono gli altri?',
   },
   {
-    id: 'technologies',
+    id: 'hr.technologies',
     content: 'Ma quali tecnologie utilizzeremo?! 😱',
   },
 ];
@@ -27,7 +27,7 @@ export const hr = [
   {
     author: AUTHORS.AI,
     id: 'hr.hrPipeline',
-    nexts: ['noFear'],
+    nexts: ['hr.noFear'],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,
@@ -36,8 +36,8 @@ export const hr = [
   },
   {
     author: AUTHORS.AI,
-    id: 'noFear',
-    nexts: ['noProblems'],
+    id: 'hr.noFear',
+    nexts: ['hr.noProblems'],
     waitTime: WAIT_TIME.XL,
     content: {
       type: NODE_TYPES.TEXT,
@@ -46,8 +46,8 @@ export const hr = [
   },
   {
     author: AUTHORS.AI,
-    id: 'noProblems',
-    nexts: ['knowNothing'],
+    id: 'hr.noProblems',
+    nexts: ['hr.knowNothing'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -57,8 +57,8 @@ export const hr = [
   },
   {
     author: AUTHORS.USER,
-    id: 'knowNothing',
-    nexts: ['usEither'],
+    id: 'hr.knowNothing',
+    nexts: ['hr.usEither'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -68,8 +68,8 @@ export const hr = [
   },
   {
     author: AUTHORS.AI,
-    id: 'usEither',
-    nexts: ['onlyCoders'],
+    id: 'hr.usEither',
+    nexts: ['hr.onlyCoders'],
     waitTime: WAIT_TIME.L,
     content: {
       type: NODE_TYPES.TEXT,
@@ -78,8 +78,8 @@ export const hr = [
   },
   {
     author: AUTHORS.AI,
-    id: 'onlyCoders',
-    nexts: ['prepareSomething', 'who', 'technologies'],
+    id: 'hr.onlyCoders',
+    nexts: ['hr.prepareSomething', 'hr.who', 'hr.technologies'],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,
@@ -89,8 +89,8 @@ export const hr = [
   },
   {
     author: AUTHORS.USER,
-    id: 'prepareSomething',
-    nexts: ['teamPipeline'],
+    id: 'hr.prepareSomething',
+    nexts: ['team.teamPipeline'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -99,8 +99,8 @@ export const hr = [
   },
   {
     author: AUTHORS.USER,
-    id: 'who',
-    nexts: ['ourMentor'],
+    id: 'hr.who',
+    nexts: ['hr.ourMentor'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -109,8 +109,8 @@ export const hr = [
   },
   {
     author: AUTHORS.AI,
-    id: 'ourMentor',
-    nexts: ['goodAtCSS'],
+    id: 'hr.ourMentor',
+    nexts: ['hr.goodAtCSS'],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,
@@ -120,8 +120,8 @@ export const hr = [
   },
   {
     author: AUTHORS.USER,
-    id: 'goodAtCSS',
-    nexts: ['ourCoMentor'],
+    id: 'hr.goodAtCSS',
+    nexts: ['hr.ourCoMentor'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -130,8 +130,8 @@ export const hr = [
   },
   {
     author: AUTHORS.AI,
-    id: 'ourCoMentor',
-    nexts: ['prepareSomething'],
+    id: 'hr.ourCoMentor',
+    nexts: ['hr.prepareSomething'],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,
@@ -140,8 +140,8 @@ export const hr = [
   },
   {
     author: AUTHORS.USER,
-    id: 'technologies',
-    nexts: ['techPipeline'],
+    id: 'hr.technologies',
+    nexts: ['dx.dxPipeline'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,

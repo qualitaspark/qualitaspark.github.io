@@ -1,10 +1,15 @@
 import { AUTHORS, NODE_TYPES, WAIT_TIME } from '../const.js';
+import { corePipelinesMessages } from './core.js';
+
+const _corePipelinesMessages = corePipelinesMessages.filter(
+  message => message.id !== 'value.userValuePipeline'
+);
 
 export const value = [
   {
     author: AUTHORS.AI,
-    id: 'valuePipeline',
-    nexts: ['usefulAndBeautiful'],
+    id: 'value.valuePipeline',
+    nexts: ['value.usefulAndBeautiful'],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,
@@ -13,19 +18,19 @@ export const value = [
   },
   {
     author: AUTHORS.AI,
-    id: 'usefulAndBeautiful',
-    nexts: ['thatsWannaBe'],
+    id: 'value.usefulAndBeautiful',
+    nexts: ['value.thatsWannaBe'],
     waitTime: WAIT_TIME.XL,
     content: {
       type: NODE_TYPES.TEXT,
       content:
-        'Secondo me essere uno strumento potente significa essere utile e soprattutto piacevole da utilizzare',
+        'Essere uno strumento potente significa essere utile e soprattutto piacevole da utilizzare',
     },
   },
   {
     author: AUTHORS.AI,
-    id: 'thatsWannaBe',
-    nexts: ['anExperience'],
+    id: 'value.thatsWannaBe',
+    nexts: ['value.anExperience'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -34,8 +39,8 @@ export const value = [
   },
   {
     author: AUTHORS.AI,
-    id: 'anExperience',
-    nexts: ['tellMeWhatYouWant'],
+    id: 'value.anExperience',
+    nexts: ['value.tellMeWhatYouWant'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -44,8 +49,8 @@ export const value = [
   },
   {
     author: AUTHORS.AI,
-    id: 'tellMeWhatYouWant',
-    nexts: ['improvingTogether'],
+    id: 'value.tellMeWhatYouWant',
+    nexts: ['value.improvingTogether'],
     waitTime: WAIT_TIME.L,
     content: {
       type: NODE_TYPES.TEXT,
@@ -55,8 +60,8 @@ export const value = [
   },
   {
     author: AUTHORS.AI,
-    id: 'improvingTogether',
-    nexts: ['bigIdeas'],
+    id: 'value.improvingTogether',
+    nexts: ['value.bigIdeas'],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,
@@ -65,8 +70,8 @@ export const value = [
   },
   {
     author: AUTHORS.AI,
-    id: 'bigIdeas',
-    // TODO
+    id: 'value.bigIdeas',
+    nexts: _corePipelinesMessages.map(({ id }) => id),
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,

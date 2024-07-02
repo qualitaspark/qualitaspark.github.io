@@ -54,8 +54,7 @@ export const dx = [
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
-      content:
-        'React per il nostro Frontend 👗 e NestJS per il nostro backend ⚙️',
+      content: 'React per il Frontend 👗 e NestJS per il backend ⚙️',
     },
   },
   {
@@ -130,7 +129,7 @@ export const dx = [
     content: {
       type: NODE_TYPES.TEXT,
       content:
-        'Useremo Langchain per interfacciarci con OpeanAI 🌍 e costruirmi!',
+        'Useremo Langchain per interfacciarci con OpeanAI 🌍 e rendermi intelligente!',
     },
   },
   {
@@ -148,10 +147,45 @@ export const dx = [
     id: 'dx.completeStack-0-meme',
     nexts: ['dx.completeStack-0-ok'],
     waitTime: WAIT_TIME.M,
-    content: {
-      type: NODE_TYPES.IMG,
-      content: './../../assets/images/29xp-meme-articleLarge-v3.webp',
-    },
+    content: [
+      {
+        type: NODE_TYPES.IMGS,
+        classes: ['bubble-img'],
+        content: [
+          {
+            type: NODE_TYPES.IMG,
+            content: './../../assets/images/29xp-meme-articleLarge-v3.webp',
+          },
+        ],
+      },
+      {
+        type: NODE_TYPES.IMGS,
+        classes: ['bubble-img'],
+        content: [
+          {
+            type: NODE_TYPES.IMG,
+            content: '/assets/images/dai.gif',
+            otherProps: {
+              alt: 'dai, dai, dai! cit: Boris',
+            },
+          },
+          {
+            type: NODE_TYPES.IMG,
+            content: '/assets/images/dai.gif',
+            otherProps: {
+              alt: 'dai, dai, dai! cit: Boris',
+            },
+          },
+          {
+            type: NODE_TYPES.IMG,
+            content: '/assets/images/dai.gif',
+            otherProps: {
+              alt: 'dai, dai, dai! cit: Boris',
+            },
+          },
+        ],
+      },
+    ],
   },
   {
     author: AUTHORS.AI,
@@ -281,8 +315,14 @@ export const dx = [
     nexts: ['dx.hihi'],
     waitTime: WAIT_TIME.L,
     content: {
-      type: NODE_TYPES.IMG,
-      content: './../../assets/images/Trollface_non-free.png',
+      type: NODE_TYPES.IMGS,
+      classes: ['bubble-img'],
+      content: [
+        {
+          type: NODE_TYPES.IMG,
+          content: './../../assets/images/Trollface_non-free.png',
+        },
+      ],
     },
   },
   {

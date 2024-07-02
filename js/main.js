@@ -4,13 +4,14 @@ import {
   AUTHORS,
   BTN_CLASSES,
   NODE_TYPES,
-  TEXT_CLASSES,
   BUBBLE_CLASSES,
   DOT_CLASSES,
 } from './const.js';
 import { actions, messages } from './messages.js';
 import { Cursor } from './cursor.js';
 import './lenis.js';
+import { corePipelinesMessages } from './pipelines/core.js';
+import { actions as exitActions } from './pipelines/exit.js';
 
 export default function main() {
   let _aiSpeed = 1300;
@@ -22,11 +23,12 @@ export default function main() {
   let _userBubbleIsWriting;
   let _moodQuestions = 0;
   let _userScore = 0;
-  let onOptionMount;
+  const _choosedActions = [];
   const _chat = document.getElementById('messages');
   const _optionsSecondary = document.getElementById('options-secondary');
-  const _optionsPrimary = document.getElementById('options-primary');
   const _options = document.getElementById('options');
+  let onOptionMount;
+  let onActionClick;
 
   const _buildBaseNode = (node, element) => {
     Object.keys(node?.otherProps || {})
@@ -144,6 +146,8 @@ export default function main() {
     btnContainer.classList.add(BTN_CLASSES.BTN, BTN_CLASSES.BTN_SECONDARY);
 
     btnContainer.addEventListener('click', () => {
+      _choosedActions.push(action.id);
+
       if (/.*-(positive|neutral|negative)$/.test(action.id)) {
         _moodQuestions++;
 
@@ -155,6 +159,8 @@ export default function main() {
       }
 
       _setCurrentMessage(action.id);
+
+      onActionClick && onActionClick(action);
     });
 
     const span = document.createElement('span');
@@ -167,9 +173,27 @@ export default function main() {
   };
 
   const _buildActions = messages => {
-    return actions
-      .filter(({ id }) => messages.some(msgId => msgId === id))
+    const includePipelines = messages.some(id => id.includes('Pipeline'));
+    let _messages = includePipelines
+      ? [
+          ...new Map(
+            [...messages, ...corePipelinesMessages].map(({ id }) => [id, id])
+          ).values(),
+        ]
+      : messages;
+    const _actions = actions
+      .filter(
+        ({ id }) =>
+          _messages.some(msgId => msgId === id) &&
+          !_choosedActions.some(cA => cA === id)
+      )
       .map(action => _buildAction(action));
+
+    if (_actions.length === 0 && includePipelines) {
+      return exitActions.map(action => _buildAction(action));
+    }
+
+    return _actions;
   };
 
   const _buildIsWritingBubble = author => {
@@ -210,17 +234,28 @@ export default function main() {
     _chat.appendChild(_currentBubble.node);
     _bubbles.push(_currentBubble);
 
-    const next = _getNext(_currentBubble);
+    const nexts = _getNext(_currentBubble);
 
-    if (!next || Object.keys(next) === 0 || !next.build) {
+    if (!nexts || nexts.length === 0 || nexts.every(n => !n.build)) {
       _loop = false;
       _currentBubble = undefined;
 
       return;
     }
 
-    if (next.message.author === AUTHORS.AI) {
-      const isWritingBubble = _buildIsWritingBubble(next.message.author);
+    if (nexts.every(n => n.message.author === AUTHORS.USER)) {
+      _loop = false;
+
+      _chat.classList.add('userIsWritingPlaceholder');
+
+      _actions = _buildActions(nexts.map(n => n.message.id));
+      _actions.forEach(action => _optionsSecondary.appendChild(action));
+      setTimeout(() => onOptionMount && onOptionMount(), 1);
+      return;
+    }
+
+    if (nexts[0].message.author === AUTHORS.AI) {
+      const isWritingBubble = _buildIsWritingBubble(nexts[0].message.author);
       _chat.appendChild(isWritingBubble);
 
       setTimeout(() => {
@@ -228,54 +263,32 @@ export default function main() {
       }, 100);
     }
 
-    if (next.message.author === AUTHORS.USER) {
-      _loop = false;
-
-      const _userMessages = _messages.reduce(
-        (acc, message) => [
-          ...acc,
-          ...(_currentBubble.message.nexts.some(
-            n => n === message.message.id
-          ) && message.message.author === AUTHORS.USER
-            ? [message.message.id]
-            : []),
-        ],
-        []
-      );
-
-      _chat.classList.add('userIsWritingPlaceholder');
-
-      _actions = _buildActions(_userMessages);
-      _actions.forEach(action => _optionsSecondary.appendChild(action));
-      setTimeout(() => onOptionMount && onOptionMount(), 100);
-      return;
-    }
-
-    _currentBubble = next;
+    _currentBubble = nexts[0];
 
     setTimeout(() => _appendNext(), aiSpeed);
   };
 
   function renderLoop() {
     _bubbles = _bubbles?.flatMap(bubble => {
-      if (!bubble.node.className.includes(ANIMATIONS_CLASSES.IN)) {
-        setTimeout(() => {
-          bubble.node.classList.add(ANIMATIONS_CLASSES.IN);
-
-          setTimeout(() => {
-            const _currentMessageRect = bubble.node.getBoundingClientRect();
-            const y =
-              _currentMessageRect.top +
-              _currentMessageRect.height +
-              window.scrollY -
-              20;
-            window.scrollTo({ top: y, behavior: 'smooth' });
-          }, 300);
-        }, 1);
-        return [];
+      if (bubble.node.className.includes(ANIMATIONS_CLASSES.IN)) {
+        return bubble;
       }
 
-      return bubble;
+      setTimeout(() => {
+        bubble.node.classList.add(ANIMATIONS_CLASSES.IN);
+
+        setTimeout(() => {
+          const _currentMessageRect = bubble.node.getBoundingClientRect();
+          const y =
+            _currentMessageRect.top +
+            _currentMessageRect.height +
+            window.scrollY -
+            20;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }, 300);
+      }, 1);
+
+      return [];
     });
 
     if (!_loop) {
@@ -286,11 +299,21 @@ export default function main() {
   }
 
   const _getNext = () => {
-    return _messages.find(message =>
+    const next = _messages.filter(message =>
       _currentBubble.message.nexts?.some(n => {
         return n === message.message.id;
       })
     );
+
+    if (!next) {
+      console.error(
+        _currentBubble.message.id,
+        _currentBubble.message.nexts,
+        _messages.map(({ message: { id } }) => id)
+      );
+    }
+
+    return next;
   };
 
   const _appendBubbleAndStartLoop = (bubble, aiSpeed) => {
@@ -407,8 +430,12 @@ window.onload = () => {
 
   requestAnimationFrame(raf);
   chat.init(messages, {
-    startId: 'oh',
+    startId: 'intro.oh',
     startChatCallback: handleStartChatCallback,
+    onActionClick: () => {
+      cursor.removeMouseHighlight();
+    },
+    corePipelinesMessages,
     onOptionMount: () => {
       cursor.refresh();
     },
