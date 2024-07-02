@@ -359,7 +359,7 @@ export const intro = [
   {
     author: AUTHORS.USER,
     id: 'intro.stayLonger-neutral',
-    // TODO
+    nexts: ['value.valuePipeline'],
     content: {
       type: NODE_TYPES.TEXT,
       content: 'Si può fare',
@@ -368,7 +368,7 @@ export const intro = [
   {
     author: AUTHORS.USER,
     id: 'intro.stayLonger-negative',
-    // TODO
+    nexts: ['exit.exitPipeline'],
     // !EXIT
     content: {
       type: NODE_TYPES.TEXT,
@@ -378,7 +378,7 @@ export const intro = [
   {
     author: AUTHORS.USER,
     id: 'intro.stayLonger-positive',
-    // TODO
+    nexts: ['value.valuePipeline'],
     content: {
       type: NODE_TYPES.TEXT,
       content: 'Ok, fammi vedere che sai fare',
