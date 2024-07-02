@@ -147,45 +147,16 @@ export const dx = [
     id: 'dx.completeStack-0-meme',
     nexts: ['dx.completeStack-0-ok'],
     waitTime: WAIT_TIME.M,
-    content: [
-      {
-        type: NODE_TYPES.IMGS,
-        classes: ['bubble-img'],
-        content: [
-          {
-            type: NODE_TYPES.IMG,
-            content: './../../assets/images/29xp-meme-articleLarge-v3.webp',
-          },
-        ],
-      },
-      {
-        type: NODE_TYPES.IMGS,
-        classes: ['bubble-img'],
-        content: [
-          {
-            type: NODE_TYPES.IMG,
-            content: '/assets/images/dai.gif',
-            otherProps: {
-              alt: 'dai, dai, dai! cit: Boris',
-            },
-          },
-          {
-            type: NODE_TYPES.IMG,
-            content: '/assets/images/dai.gif',
-            otherProps: {
-              alt: 'dai, dai, dai! cit: Boris',
-            },
-          },
-          {
-            type: NODE_TYPES.IMG,
-            content: '/assets/images/dai.gif',
-            otherProps: {
-              alt: 'dai, dai, dai! cit: Boris',
-            },
-          },
-        ],
-      },
-    ],
+    content: {
+      type: NODE_TYPES.IMGS,
+      classes: ['bubble-img'],
+      content: [
+        {
+          type: NODE_TYPES.IMG,
+          content: './../../assets/images/29xp-meme-articleLarge-v3.webp',
+        },
+      ],
+    },
   },
   {
     author: AUTHORS.AI,
