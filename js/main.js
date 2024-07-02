@@ -369,6 +369,7 @@ export default function main() {
       build: () => _buildBubble(message),
       message,
     }));
+    onActionClick = config?.onActionClick;
     onOptionMount = config?.onOptionMount;
 
     const firstMessage =
