@@ -2,51 +2,51 @@ import { AUTHORS, NODE_TYPES, WAIT_TIME } from '../const.js';
 
 export const actions = [
   {
-    id: 'userGreetings-neutral',
+    id: 'intro.userGreetings-neutral',
     content: 'Ciao',
   },
   {
-    id: 'userGreetings-positive',
+    id: 'intro.userGreetings-positive',
     content: 'Ciao 👋',
   },
   {
-    id: 'userGreetings-negative',
+    id: 'intro.userGreetings-negative',
     content: 'Che noia 😴',
   },
   {
-    id: 'soCool-positive',
+    id: 'intro.soCool-positive',
     content: 'Figata 🤯',
   },
   {
-    id: 'whyIAmHere-negative',
+    id: 'intro.whyIAmHere-negative',
     content: 'Perchè sono qui?',
   },
   {
-    id: 'pleasure-neutral',
+    id: 'intro.pleasure-neutral',
     content: 'Piacere',
   },
   {
-    id: 'userComing-positive',
+    id: 'intro.userComing-positive',
     content: 'Certo che ci sono',
   },
   {
-    id: 'userComing-neutral',
+    id: 'intro.userComing-neutral',
     content: '👍',
   },
   {
-    id: 'userComing-negative',
+    id: 'intro.userComing-negative',
     content: 'No, purtroppo',
   },
   {
-    id: 'stayLonger-neutral',
+    id: 'intro.stayLonger-neutral',
     content: 'Si può fare',
   },
   {
-    id: 'stayLonger-negative',
+    id: 'intro.stayLonger-negative',
     content: 'No mi dispiace, devo scappare',
   },
   {
-    id: 'stayLonger-positive',
+    id: 'intro.stayLonger-positive',
     content: 'Ok, fammi vedere che sai fare',
   },
 ];
@@ -54,8 +54,8 @@ export const actions = [
 export const intro = [
   {
     author: AUTHORS.AI,
-    id: 'oh',
-    nexts: ['embarassed'],
+    id: 'intro.oh',
+    nexts: ['intro.embarassed'],
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
@@ -64,8 +64,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'embarassed',
-    nexts: ['greetings'],
+    id: 'intro.embarassed',
+    nexts: ['intro.greetings'],
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
@@ -74,11 +74,11 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'greetings',
+    id: 'intro.greetings',
     nexts: [
-      'userGreetings-neutral',
-      'userGreetings-positive',
-      'userGreetings-negative',
+      'intro.userGreetings-neutral',
+      'intro.userGreetings-positive',
+      'intro.userGreetings-negative',
     ],
     waitTime: WAIT_TIME.R,
     content: {
@@ -88,8 +88,8 @@ export const intro = [
   },
   {
     author: AUTHORS.USER,
-    id: 'userGreetings-neutral',
-    nexts: ['meetingSomeone-neutral'],
+    id: 'intro.userGreetings-neutral',
+    nexts: ['intro.meetingSomeone-neutral'],
     content: {
       type: NODE_TYPES.TEXT,
       content: 'Ciao',
@@ -97,8 +97,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'meetingSomeone-neutral',
-    nexts: ['weCanDoBetter'],
+    id: 'intro.meetingSomeone-neutral',
+    nexts: ['intro.weCanDoBetter'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -107,8 +107,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'weCanDoBetter',
-    nexts: ['presentation'],
+    id: 'intro.weCanDoBetter',
+    nexts: ['intro.presentation'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -117,8 +117,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'presentation',
-    nexts: ['iAmQualìta'],
+    id: 'intro.presentation',
+    nexts: ['intro.iAmQualìta'],
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
@@ -127,8 +127,12 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'iAmQualìta',
-    nexts: ['soCool-positive', 'whyIAmHere-negative', 'pleasure-neutral'],
+    id: 'intro.iAmQualìta',
+    nexts: [
+      'intro.soCool-positive',
+      'intro.whyIAmHere-negative',
+      'intro.pleasure-neutral',
+    ],
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
@@ -137,8 +141,8 @@ export const intro = [
   },
   {
     author: AUTHORS.USER,
-    id: 'soCool-positive',
-    nexts: ['melting'],
+    id: 'intro.soCool-positive',
+    nexts: ['intro.melting'],
     content: {
       type: NODE_TYPES.TEXT,
       content: 'Figata 🤯',
@@ -146,8 +150,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'melting',
-    nexts: ['funnyRight'],
+    id: 'intro.melting',
+    nexts: ['intro.funnyRight'],
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
@@ -156,8 +160,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'funnyRight',
-    nexts: ['cantWait'],
+    id: 'intro.funnyRight',
+    nexts: ['intro.cantWait'],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,
@@ -166,8 +170,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'cantWait',
-    nexts: ['toTheSparkathon'],
+    id: 'intro.cantWait',
+    nexts: ['intro.toTheSparkathon'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -176,8 +180,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'toTheSparkathon',
-    nexts: ['sparkathonLove'],
+    id: 'intro.toTheSparkathon',
+    nexts: ['intro.sparkathonLove'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -186,8 +190,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'sparkathonLove',
-    nexts: ['userComing'],
+    id: 'intro.sparkathonLove',
+    nexts: ['intro.userComing'],
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
@@ -196,8 +200,12 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'userComing',
-    nexts: ['userComing-positive', 'userComing-neutral', 'userComing-negative'],
+    id: 'intro.userComing',
+    nexts: [
+      'intro.userComing-positive',
+      'intro.userComing-neutral',
+      'intro.userComing-negative',
+    ],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,
@@ -206,8 +214,8 @@ export const intro = [
   },
   {
     author: AUTHORS.USER,
-    id: 'userComing-positive',
-    nexts: ['meetIRL'],
+    id: 'intro.userComing-positive',
+    nexts: ['intro.meetIRL'],
     content: {
       type: NODE_TYPES.TEXT,
       content: 'Certo che ci sono',
@@ -215,8 +223,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'meetIRL',
-    nexts: ['awesome'],
+    id: 'intro.meetIRL',
+    nexts: ['intro.awesome'],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,
@@ -225,9 +233,13 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'awesome',
+    id: 'intro.awesome',
     // TODO
-    nexts: ['userValuePipeline', 'userHrPipeline'],
+    nexts: [
+      'value.userValuePipeline',
+      'hr.userHrPipeline',
+      'dx.userDxPipeline',
+    ],
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
@@ -236,8 +248,8 @@ export const intro = [
   },
   {
     author: AUTHORS.USER,
-    id: 'userComing-neutral',
-    nexts: ['meetIRLBored'],
+    id: 'intro.userComing-neutral',
+    nexts: ['intro.meetIRLBored'],
     content: {
       type: NODE_TYPES.TEXT,
       content: '👍',
@@ -245,8 +257,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'meetIRLBored',
-    nexts: ['sawSubjects'],
+    id: 'intro.meetIRLBored',
+    nexts: ['intro.sawSubjects'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -255,7 +267,7 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'sawSubjects',
+    id: 'intro.sawSubjects',
     // TODO
     waitTime: WAIT_TIME.L,
     content: {
@@ -265,8 +277,8 @@ export const intro = [
   },
   {
     author: AUTHORS.USER,
-    id: 'userComing-negative',
-    nexts: ['tooBad'],
+    id: 'intro.userComing-negative',
+    nexts: ['intro.tooBad'],
     content: {
       type: NODE_TYPES.TEXT,
       content: 'No, purtroppo',
@@ -274,8 +286,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'tooBad',
-    nexts: ['niceToMeetYouIRL'],
+    id: 'intro.tooBad',
+    nexts: ['intro.niceToMeetYouIRL'],
     waitTime: 500,
     content: {
       type: NODE_TYPES.TEXT,
@@ -284,7 +296,7 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'niceToMeetYouIRL',
+    id: 'intro.niceToMeetYouIRL',
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -293,8 +305,8 @@ export const intro = [
   },
   {
     author: AUTHORS.USER,
-    id: 'whyIAmHere-negative',
-    nexts: ['dunno'],
+    id: 'intro.whyIAmHere-negative',
+    nexts: ['intro.dunno'],
     content: {
       type: NODE_TYPES.TEXT,
       content: 'Che ci faccio qui? 👀',
@@ -302,8 +314,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'dunno',
-    nexts: ['maybeYouClickedWrong'],
+    id: 'intro.dunno',
+    nexts: ['intro.maybeYouClickedWrong'],
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
@@ -312,8 +324,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'maybeYouClickedWrong',
-    nexts: ['nicePlace'],
+    id: 'intro.maybeYouClickedWrong',
+    nexts: ['intro.nicePlace'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -322,8 +334,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'nicePlace',
-    nexts: ['stayLonger'],
+    id: 'intro.nicePlace',
+    nexts: ['intro.stayLonger'],
     waitTime: WAIT_TIME.L,
     content: {
       type: NODE_TYPES.TEXT,
@@ -332,8 +344,12 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'stayLonger',
-    nexts: ['stayLonger-neutral', 'stayLonger-negative', 'stayLonger-positive'],
+    id: 'intro.stayLonger',
+    nexts: [
+      'intro.stayLonger-neutral',
+      'stayLonger-negative',
+      'stayLonger-positive',
+    ],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -342,7 +358,7 @@ export const intro = [
   },
   {
     author: AUTHORS.USER,
-    id: 'stayLonger-neutral',
+    id: 'intro.stayLonger-neutral',
     // TODO
     content: {
       type: NODE_TYPES.TEXT,
@@ -351,7 +367,7 @@ export const intro = [
   },
   {
     author: AUTHORS.USER,
-    id: 'stayLonger-negative',
+    id: 'intro.stayLonger-negative',
     // TODO
     // !EXIT
     content: {
@@ -361,7 +377,7 @@ export const intro = [
   },
   {
     author: AUTHORS.USER,
-    id: 'stayLonger-positive',
+    id: 'intro.stayLonger-positive',
     // TODO
     content: {
       type: NODE_TYPES.TEXT,
@@ -370,8 +386,8 @@ export const intro = [
   },
   {
     author: AUTHORS.USER,
-    id: 'pleasure-neutral',
-    nexts: ['cantWait'],
+    id: 'intro.pleasure-neutral',
+    nexts: ['intro.cantWait'],
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
@@ -380,8 +396,8 @@ export const intro = [
   },
   {
     author: AUTHORS.USER,
-    id: 'userGreetings-positive',
-    nexts: ['niceVibe'],
+    id: 'intro.userGreetings-positive',
+    nexts: ['intro.niceVibe'],
     waitTime: WAIT_TIME.S,
     content: {
       type: NODE_TYPES.TEXT,
@@ -390,8 +406,8 @@ export const intro = [
   },
   {
     author: AUTHORS.AI,
-    id: 'niceVibe',
-    nexts: ['presentation'],
+    id: 'intro.niceVibe',
+    nexts: ['intro.presentation'],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,
@@ -400,8 +416,8 @@ export const intro = [
   },
   {
     author: AUTHORS.USER,
-    id: 'userGreetings-negative',
-    nexts: ['maybeYouClickedWrong'],
+    id: 'intro.userGreetings-negative',
+    nexts: ['intro.maybeYouClickedWrong'],
     content: {
       type: NODE_TYPES.TEXT,
       content: 'Che noia 😴',

@@ -1,71 +1,68 @@
-import { AUTHORS, NODE_TYPES, WAIT_TIME } from "../const.js";
+import { AUTHORS, NODE_TYPES, WAIT_TIME } from '../const.js';
+import { corePipelinesActions, corePipelinesMessages } from './core.js';
 
 export const actions = [
   {
-    id: "downloadSomething",
-    content: "Devo scaricare qualcosa?",
+    id: 'team.downloadSomething',
+    content: 'Devo scaricare qualcosa?',
   },
   {
-    id: "whatContain",
-    content: "Cosa conterrà?",
+    id: 'team.whatContain',
+    content: 'Cosa conterrà?',
   },
   {
-    id: "ifIJoin",
-    content: "Di cosa mi occuperei? 🤔",
+    id: 'team.ifIJoin',
+    content: 'Di cosa mi occuperei? 🤔',
   },
   {
-    id: "technologies",
-    content: "Ma quali tecnologie utilizzeremo?! 😱",
+    id: 'team.who',
+    content: 'Ma in questo team chi troverò? 🤌🏻',
   },
   {
-    id: "who",
-    content: "Ma in questo team chi troverò? 🤌🏻",
+    id: 'team.goodAtCSS',
+    content: 'Chi sono gli altri?',
   },
   {
-    id: "goodAtCSS",
-    content: "Chi sono gli altri?",
-  },
-  {
-    id: "howToContribute",
-    content: "Posso proporre qualcosa?",
+    id: 'team.howToContribute',
+    content: 'Posso proporre qualcosa?',
   },
 ];
 
 export const team = [
   {
     author: AUTHORS.AI,
-    id: "teamPipeline",
-    nexts: ["thinkAboutIt"],
+    id: 'team.teamPipeline',
+    nexts: ['team.thinkAboutIt'],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,
-      content: "Non ti devi preoccupare di nulla!",
+      content: 'Non ti devi preoccupare di nulla!',
     },
   },
   {
     author: AUTHORS.AI,
-    id: "thinkAboutIt",
-    nexts: ["downloadSomething"],
+    id: 'team.thinkAboutIt',
+    nexts: ['team.downloadSomething'],
     waitTime: WAIT_TIME.XL,
     content: {
       type: NODE_TYPES.TEXT,
-      content: "Tu porta la voglia di fare, al resto pensiamo noi! 🫶🏻",
+      content: 'Tu porta la voglia di fare, al resto pensiamo noi! 🫶🏻',
     },
   },
   {
     author: AUTHORS.USER,
-    id: "downloadSomething",
-    nexts: ["starterKit"],
+    id: 'team.downloadSomething',
+    nexts: ['team.starterKit'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
-      content: "Devo scaricare qualche SDK o altro? ⬇️",
+      content: 'Devo scaricare qualche SDK o altro? ⬇️',
     },
   },
   {
     author: AUTHORS.AI,
-    id: "starterKit",
-    nexts: ["whatContain"],
+    id: 'team.starterKit',
+    nexts: ['team.whatContain'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -75,18 +72,18 @@ export const team = [
   },
   {
     author: AUTHORS.USER,
-    id: "whatContain",
-    nexts: ["repository"],
+    id: 'team.whatContain',
+    nexts: ['team.repository'],
     waitTime: WAIT_TIME.L,
     content: {
       type: NODE_TYPES.TEXT,
-      content: "Wow e cosa conterrà? 🤓",
+      content: 'Wow e cosa conterrà? 🤓',
     },
   },
   {
     author: AUTHORS.AI,
-    id: "repository",
-    nexts: ["kitContent"],
+    id: 'team.repository',
+    nexts: ['team.kitContent'],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,
@@ -96,19 +93,19 @@ export const team = [
   },
   {
     author: AUTHORS.AI,
-    id: "kitContent",
-    nexts: ["eventDay"],
+    id: 'team.kitContent',
+    nexts: ['team.eventDay'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
       content:
-        "Al suo interno troverai i data sources necessari, le info necessarie come le key ai servizi esterni e dei progetti buildabili 🏗️",
+        'Al suo interno troverai i data sources necessari, le info necessarie come le key ai servizi esterni e dei progetti buildabili 🏗️',
     },
   },
   {
     author: AUTHORS.AI,
-    id: "eventDay",
-    nexts: ["technologies", "ifIJoin"],
+    id: 'team.eventDay',
+    nexts: ['team.technologies', 'team.ifIJoin'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
@@ -118,39 +115,39 @@ export const team = [
   },
   {
     author: AUTHORS.USER,
-    id: "technologies",
-    nexts: ["dx.dxPipeline"],
+    id: 'team.technologies',
+    nexts: ['dx.dxPipeline'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
-      content: "Ma quali tecnologie utilizzeremo?! 😱",
+      content: 'Ma quali tecnologie utilizzeremo?! 😱',
     },
   },
   {
     author: AUTHORS.USER,
-    id: "ifIJoin",
-    nexts: ["decideTogether"],
+    id: 'team.ifIJoin',
+    nexts: ['team.decideTogether'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
-      content: "Se decidessi di unirmi a voi, di cosa mi occuperei? 🤔",
+      content: 'Se decidessi di unirmi a voi, di cosa mi occuperei? 🤔',
     },
   },
   {
     author: AUTHORS.AI,
-    id: "decideTogether",
-    nexts: ["preparationWeek"],
+    id: 'team.decideTogether',
+    nexts: ['team.preparationWeek'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
-      content: "Beh ma questo lo decideremo insieme! 🫱🏼‍🫲🏽",
+      content: 'Beh ma questo lo decideremo insieme! 🫱🏼‍🫲🏽',
     },
   },
   {
     author: AUTHORS.AI,
-    id: "preparationWeek",
-    nexts: ["who"],
-    waitTime: WAIT_TIME.M,
+    id: 'team.preparationWeek',
+    nexts: ['team.who'],
+    waitTime: WAIT_TIME.XL,
     content: {
       type: NODE_TYPES.TEXT,
       content:
@@ -159,64 +156,64 @@ export const team = [
   },
   {
     author: AUTHORS.USER,
-    id: "who",
-    nexts: ["ourMentor"],
+    id: 'team.who',
+    nexts: ['team.ourMentor'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
-      content: "Ma in questo team chi troverò? 🤌🏻",
+      content: 'Ma in questo team chi troverò? 🤌🏻',
     },
   },
   {
     author: AUTHORS.AI,
-    id: "ourMentor",
-    nexts: ["goodAtCSS"],
+    id: 'team.ourMentor',
+    nexts: ['team.goodAtCSS'],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,
       content:
-        "Ogni gruppo avrà un mentor ed il nostro sarà Emiliano Morghen, ma non è solo! 🏄🏻‍♂️",
+        'Ogni gruppo avrà un mentor ed il nostro sarà Emiliano Morghen, ma non è solo! 🏄🏻‍♂️',
     },
   },
   {
     author: AUTHORS.USER,
-    id: "goodAtCSS",
-    nexts: ["ourCoMentor"],
+    id: 'team.goodAtCSS',
+    nexts: ['team.ourCoMentor'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
-      content: "So che è fortissimo con il CSS! Chi sono gli altri?",
+      content: 'So che è fortissimo con il CSS! Chi sono gli altri?',
     },
   },
   {
     author: AUTHORS.AI,
-    id: "ourCoMentor",
-    nexts: ["prepareSomething"],
+    id: 'team.ourCoMentor',
+    nexts: ['hr.prepareSomething'],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,
-      content: "Giulio Bracci e Brian Atzori, il nostro porta borracce!🥤",
+      content: 'Giulio Bracci e Brian Atzori, il nostro porta borracce!🥤',
     },
   },
   {
     author: AUTHORS.USER,
-    id: "howToContribute",
-    nexts: ["moreContributes"],
+    id: 'team.howToContribute',
+    nexts: ['team.moreContributes'],
     waitTime: WAIT_TIME.M,
     content: {
       type: NODE_TYPES.TEXT,
-      content: "Ma io posso proporre qualcosa? Come posso contribuire? 🤩",
+      content: 'Ma io posso proporre qualcosa? Come posso contribuire? 🤩',
     },
   },
   {
     author: AUTHORS.AI,
-    id: "moreContributes",
-    nexts: ["hrPipeline"],
+    id: 'team.moreContributes',
+    nexts: ['hr.hrPipeline'],
     waitTime: WAIT_TIME.R,
     content: {
       type: NODE_TYPES.TEXT,
       content:
-        "Certo! Abbiamo bisogno di più contributi possibili per mettermi in piedi! 👷🏻👷🏼‍♂️",
+        'Certo! Abbiamo bisogno di più contributi possibili per mettermi in piedi! 👷🏻👷🏼‍♂️',
     },
   },
 ];
